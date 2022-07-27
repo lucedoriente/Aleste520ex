@@ -866,7 +866,6 @@
     )
   )
 
-
   (junction (at 149.86 185.42) (diameter 0) (color 0 0 0 0)
     (uuid 21a4e5f9-158c-4a1e-a6d3-12c826291e62)
   )
@@ -6897,7 +6896,7 @@
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-00005671f5ff)
     (property "Reference" "C20" (id 0) (at 146.685 180.34 0))
-    (property "Value" "" (id 1) (at 153.035 180.34 0))
+    (property "Value" "1000мк" (id 1) (at 153.035 180.34 0))
     (property "Footprint" "" (id 2) (at 151.13 180.34 0)
       (effects (font (size 1.524 1.524)) hide)
     )
@@ -6984,7 +6983,7 @@
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000056724beb)
     (property "Reference" "CB1" (id 0) (at 156.845 180.34 0))
-    (property "Value" "" (id 1) (at 163.195 180.34 0))
+    (property "Value" "0,1мк" (id 1) (at 163.195 180.34 0))
     (property "Footprint" "" (id 2) (at 161.29 180.34 0)
       (effects (font (size 1.524 1.524)) hide)
     )
@@ -7165,7 +7164,7 @@
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-0000568c3805)
     (property "Reference" "VD16" (id 0) (at 160.02 137.16 0))
-    (property "Value" "" (id 1) (at 160.02 137.16 0)
+    (property "Value" "PWR" (id 1) (at 160.02 137.16 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Footprint" "" (id 2) (at 162.56 137.16 0)
@@ -9440,19 +9439,19 @@
       (reference "C5") (unit 1) (value "CAP") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-000056733b78"
-      (reference "C6") (unit 1) (value "1mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C6") (unit 1) (value "1мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-000056762511/00000000-0000-0000-0000-0000566d5250"
-      (reference "C7") (unit 1) (value "0,33mF") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
+      (reference "C7") (unit 1) (value "0,33мк") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-000056762511/00000000-0000-0000-0000-0000586f6bcd"
       (reference "C8") (unit 1) (value "1н") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566b6778"
-      (reference "C9") (unit 1) (value "1,5mF") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
+      (reference "C9") (unit 1) (value "1,5мк") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566b8f40"
-      (reference "C10") (unit 1) (value "100mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C10") (unit 1) (value "100мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566bf787"
       (reference "C11") (unit 1) (value "12") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
@@ -9464,7 +9463,7 @@
       (reference "C13") (unit 1) (value "47н") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005676251a/00000000-0000-0000-0000-0000567065a2"
-      (reference "C14") (unit 1) (value "100mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C14") (unit 1) (value "100мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005676251a/00000000-0000-0000-0000-0000567ea65d"
       (reference "C15") (unit 1) (value "CAP") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
@@ -9476,28 +9475,28 @@
       (reference "C17") (unit 1) (value "CAP") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-000056762514/00000000-0000-0000-0000-0000565f0d72"
-      (reference "C18") (unit 1) (value "CAP") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
+      (reference "C18") (unit 1) (value "CAP") (footprint "MyLib_metric:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005671f5ff"
-      (reference "C20") (unit 1) (value "1000mF") (footprint "Capacitors_ThroughHole:C_Radial_D10_L16_P5")
+      (reference "C20") (unit 1) (value "1000мк") (footprint "Capacitors_ThroughHole:C_Radial_D10_L16_P5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000567059a0"
-      (reference "C22") (unit 1) (value "100mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C22") (unit 1) (value "100мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566be5c4"
-      (reference "C23") (unit 1) (value "0,47mF") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
+      (reference "C23") (unit 1) (value "0,47мк") (footprint "MyLib_metric:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005676250e/00000000-0000-0000-0000-000056706b9b"
-      (reference "C24") (unit 1) (value "1mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C24") (unit 1) (value "1мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566c05f8"
-      (reference "C25") (unit 1) (value "47mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C25") (unit 1) (value "47мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-00005663da76/00000000-0000-0000-0000-0000566bfc25"
-      (reference "C26") (unit 1) (value "47mF") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
+      (reference "C26") (unit 1) (value "47мк") (footprint "Capacitors_ThroughHole:C_Radial_D5_L6_P2.5")
     )
     (path "/00000000-0000-0000-0000-000056724beb"
-      (reference "CB1") (unit 1) (value "0,1mF") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
+      (reference "CB1") (unit 1) (value "0,1мк") (footprint "Common_Alessio:C_Disc_D7.5_P2.5")
     )
     (path "/00000000-0000-0000-0000-000056762507/faa73766-efc3-47fa-8610-07fb55240638"
       (reference "D1") (unit 1) (value "HM50256P-20") (footprint "Package_DIP:DIP-16_W7.62mm")
