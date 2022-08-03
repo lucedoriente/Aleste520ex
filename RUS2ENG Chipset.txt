@@ -1,0 +1,52 @@
+Aleste Chipset
+
+Main Chipset
+
+pcs russian    western  description    location
+ 1  Z80A CPU   Z80A     CPU            (D30=sheet2)
+ 1  UM6845     6845     CRTC           (D25=sheet2)
+ 1  AY-3-8910  AY3-8910 PSG, Dual I/O  (D18=sheet2) (with TWO I/O ports, unlike as in CPC)
+ 4  KR1802IR1  ?        RAM 16x4       (D60,D61=sheet2=palette, D62,D63=sheet4=keyboard)
+ 1  KR1810WG72 uPD765   FDC            (D70=sheet3)
+ 1  KR580WI53  8253     baudrate timer (D33=sheet4)
+ 1  KR580WW51A 8251(A?) usart/mouse    (D34=sheet2)
+ 1  KR580WW55A 8255     PPI            (D17=sheet2)
+ 1  KR512WI1   MC146818 RTC            (D19=sheet2)
+ 16 K565RU7K   HM50256  DRAM 256Kx1    (D1..D16=sheet3) (512Kbyte)
+ 1  K573RF4    27512    EPROM 64Kx8    (D31=sheet2) (BIOS/BASIC/BOOT/AMSDOS)
+ 2  K573RF2    2764     EPROM 2Kx8     (D62=COLDAT=sheet1, D65=VDKEY=sheet1)
+ 1  K155RE3    27S18    PROM 32x8 OC   (D69="Af"=sheet3=floppy)
+ 2  (KR)556RT4 27S20    PROM 256x4 OC  (D28="M"=MAP14..MAP17=sheet2, D67="R"=ROMEN/RAMEN etc.=sheet1)
+
+Further Chips
+
+pcs russian    western  description              location
+ 1  K170AP2    SN75150  rs232 dual line driver   (D86=sheet4)
+ 1  K555AP6    74LS245  8bit 3state tranceiver   (D89=sheet3)
+ 2  K555ID4    74LS155  2x2bit decoder/demult    (D54=sheet1, D74=sheet3)
+ 1  K555ID10   74LS145  bcd demultiplexer        (D80=sheet4)
+ 1  K555IE5    74LS93   4bit (1bit+3bit) counter (D72=sheet3)
+ 1  K555IE10   74LS161  4bit counter             (D37=sheet1)
+ 4  K555IR11A  74LS194  4bit shift register      (D39,D49=sheet1, D50,D51=sheet2)
+ 4  K555IR22   74LS373  8bit 3state latch        (D45,D46,D47,D48=sheet1) (RAM 16bit-to-8bit cpu/vram bus)
+ 2  K555IR23   74LS374  8bit 3state flipflop     (D58=sheet3, D84=sheet4)
+ 2  K555IR32   74LS170  4x4bit register file OC  (D87,D88=sheet2)
+ 6  K555KP2    74LS153  2x 4vstup. multiplexer   (D20,D21,D22,D23,D52,D53=sheet2)
+ 2  K555KP7    74LS151  8bit multiplexer         (D24=sheet2,D81=sheet4)
+ 1  K555KP11   74LS257  8-to-4 data selector     (D38=sheet1) (clock select)
+ 1  K555KP12   74LS253  8-to-2 data selector     (D26=sheet3)
+ 3  K555LA3    74LS00   Quad NAND gates          (D78=sheet4, D41=sheet1+2+4, D75=sheet1+3+4)
+ 1  K555LE1    74LS02   Quad NOR gates           (D43=sheet1)
+ 2  K555LI1    74LS08   Quad AND gates           (D35=sheet1+2,D85=sheet1+3)
+ 2  K555LL1    74LS32   Quad OR gates            (D29=sheet1+2,D44=sheet1)
+ 3  K555LN1    74LS04   Hex inverters            (D36=sheet1, D73=sheet3, D42=sheet1+2+4)
+ 1  K555LN2    74LS05   Hex inverters, OC        (D76=sheet3)
+ 5  K555TM2    74LS74   Dual flipflop            (D40,D77,D66,D57=sheet1, D71=sheet3)
+ 6  K555TM9    74LS174  6bit flipflop            (D32,D55,D56=sheet1, D59=sheet2, D68=sheet3, D79=sheet4)
+ 2  K561IE10   MC14520B dual up binary counter   (D63,D64=sheet1)
+
+Chipset Notes
+
+The part numbers printed on the chips may look like "KPxxx" (cyrillic) instead of "KRxxx" (latin).
+
+As mentioned at chipdir, KR1802IR1 is similar to AM29705, but NOT the same (the AM29705 has four additional data pins).
