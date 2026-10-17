@@ -1,7 +1,10 @@
-﻿Categoria;Riferimento;Valore / Funzione;Footprint KiCad;Quantita;Note Tecniche
-Connettori;J1;X8_COLS_2x06;Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical;1;Header standard 2x06 passo 2.54mm (Colonne KM0..KM10 + GND)
-Connettori;J2;X9_ROWS_2x06;Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical;1;Header standard 2x06 passo 2.54mm (Righe KM11..KM18 + SBRES + GND)
-Switch Meccanici;SW1..SW81;Cherry MX 1.00u (Matrice 81 Tasti);Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB;81;Switch meccanici Cherry MX / Gateron 5-pin PCB-mount + Plate-mount
-Switch Reset;SW82;RESET (SBRES -> GND);Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB;1;Tasto Hardware Reset verso massa (SBRES)
-Diodi Anti-Ghosting;D1..D81;1N4148;Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal;81;Diodi switching DO-35 (Catodo su Colonna KM0..KM10, Anodo su SW Pin 1)
-Fissaggio Anti-Flex;MH1..MH10;M3_AntiFlex (Foro 3.2mm);MountingHole:MountingHole_3.2mm_M3_Pad;10;Fori M3 metallizzati a GND per colonnine anti-flessione piastra/case
+Designator,Quantity,Component,Footprint,3D_Model,Specifications,Notes
+SW1..SW83,83,Cherry MX / Gateron Mechanical Switch (5-pin PCB Mount),Button_Switch_Keyboard:SW_Cherry_MX_1.00u..6.25u_PCB,keyboard/3dmodels/SW_Cherry_MX_1.00u..6.25u_PCB.wrl,"65x 1.00U, 11x 1.25U, 4x 1.50U, 1x 1.75U, 1x 2.00U, 1x 6.25U Spacebar (SW81)",82 Matrix Keys (SW1..SW82) + 1 Hardware Reset Key (SW83)
+STAB1,1,Cherry MX 6.25U PCB-Mount Stabilizer (100mm Wire),Button_Switch_Keyboard:SW_Cherry_MX_6.25u_PCB,keyboard/3dmodels/SW_Cherry_MX_6.25u_PCB.wrl,"2x Stabilizer Housings at +-50.0mm + 6.25U (100mm) Stainless Wire",For 6.25U Spacebar (SW81 on KM6 x KM15)
+D1..D82,82,1N4148 High-Speed Switching Diode,Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal,${KICAD9_3DMODEL_DIR}/Diode_THT.3dshapes/D_DO-35_SOD27_P7.62mm_Horizontal.wrl,"DO-35 Axial THT, 100V, 200mA, 4ns",Cathode (band) to Column KM0..KM10; Anode to SWk Pin 1 (Full NKRO)
+J1,1,IDC / Dupont Shrouded Box Header 2x06 (12-pin),Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical,${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x06_P2.54mm_Vertical.wrl,"2.54mm pitch, 2 rows x 6 pins, vertical THT",Connects 1:1 to Motherboard X8 (KM0..KM10 + GND)
+J2,1,IDC / Dupont Shrouded Box Header 2x06 (12-pin),Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical,${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x06_P2.54mm_Vertical.wrl,"2.54mm pitch, 2 rows x 6 pins, vertical THT",Connects 1:1 to Motherboard X9 (KM11..KM18 + SBRES + GND)
+CBL1..CBL2,2,12-Pin Flat Ribbon Cable with 2x06 IDC Female Connectors,N/A,N/A,"Length 200mm, 1.27mm ribbon pitch (2.54mm IDC)",Connects J1->X8 and J2->X9
+PLATE1,1,1.5mm Staggered Switch Mounting Plate (FR4 / Aluminum / PLA-CF),case/Aleste520_Switch_Plate.FCStd,case/Aleste520_Case.step,"358.0 x 122.0 x 1.5 mm, 83x 14x14mm cutouts + 6.25U stabilizer cutouts + 10x M3 holes",Clamps onto Top Cover anti-flex grid ribs
+KEYCAPS1,1,Staggered Keycap Set (ANSI/CPC/Aleste Profile with 6.25U Spacebar),N/A,N/A,"65x 1.00U, 11x 1.25U, 4x 1.50U, 1x 1.75U, 1x 2.00U, 1x 6.25U Spacebar",Standard Cherry MX cross-stem compatible
+MH1..MH10,10,M3x12mm Pan-Head Screws + M3 Brass Standoffs,MountingHole:MountingHole_3.2mm_M3_Pad_Via,N/A,"M3 thread, 3.2mm clearance holes",10-point anti-flex fastening to Case & Motherboard pillars

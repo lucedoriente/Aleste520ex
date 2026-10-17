@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # ============================================================================
-# ALESTE 520EX — Native FreeCAD 1.1 Parametric 3D Case & Anti-Flex Keyboard Plate
+# ALESTE 520EX — Native FreeCAD 1.1 Parametric 3D Case & Staggered Switch Plate
 # ============================================================================
 # Generates:
 #   - case/Aleste520_Case.FCStd          (Full multi-body FreeCAD Assembly + Split Quadrants)
 #   - case/Aleste520_Bottom_Case.FCStd   (Standalone Bottom Case Tray)
 #   - case/Aleste520_Top_Cover.FCStd     (Standalone Sloped Top Cover with Anti-Flex Ribs)
-#   - case/Aleste520_Switch_Plate.FCStd  (Standalone 1.5mm Cherry MX Switch Plate)
+#   - case/Aleste520_Switch_Plate.FCStd  (Standalone 1.5mm Staggered Cherry MX Switch Plate + 6.25U Stabilizers)
 #   - case/Aleste520_Case.step           (ISO 10303-21 STEP CAD Exchange File)
 # ============================================================================
 
@@ -57,7 +57,7 @@ mh_coords = [
     (220.0, 131.0, True ),  # MH6  Center (Keyboard Center Anti-Flex Pillar)
     (409.5, 148.0, True ),  # MH7  Mid-Right (Keyboard Right Anti-Flex Pillar)
     ( 23.5, 286.5, True ),  # MH8  Front-Left (Keyboard Front Anti-Flex Pillar)
-    (148.0, 285.5, True ),  # MH9  Front-Center-Left (Keyboard Front Anti-Flex Pillar)
+    (148.0, 285.5, True ),  # MH9  Front-Center-Left (Keyboard Spacebar Anti-Flex Pillar)
     (283.5, 286.5, True ),  # MH10 Front-Center-Right (Keyboard Front Anti-Flex Pillar)
     (406.5, 256.5, True ),  # MH11 Front-Right L-Wing (Keyboard Front-Right Anti-Flex Pillar)
 ]
@@ -65,8 +65,41 @@ mh_coords = [
 # 10 M3 Anti-Flex Mounting Holes on keyboard/Aleste520_Keyboard.kicad_pcb
 kb_mh_coords = [
     (  4.0,   4.0), (124.0,   4.0), (244.0,   4.0), (354.0,   4.0),
-    (  4.0,  61.0), (128.8,  49.0), (248.8,  49.0), (354.0,  61.0),
+    (  4.0,  61.0), (258.0, 113.5), (265.0,  26.0), (354.0,  61.0),
     (  4.0, 118.0), (354.0, 118.0)
+]
+
+# 83 Staggered Switch Centers (x_kb, y_kb, width_u) matching keyboard/Aleste520_Keyboard.kicad_pcb
+staggered_switches = [
+    # Row 0: Function & Control Row (y = 26.00) + Isolated Reset
+    ( 20.00,  26.00, 1.00), ( 44.00,  26.00, 1.25), ( 67.80,  26.00, 1.25), ( 91.60,  26.00, 1.25),
+    (115.40,  26.00, 1.25), (139.20,  26.00, 1.25), (168.00,  26.00, 1.25), (191.80,  26.00, 1.25),
+    (215.60,  26.00, 1.25), (239.40,  26.00, 1.25), (339.50,  26.00, 1.00),
+    # Row 1: Number Row (y = 43.50) + Numpad Row 1
+    ( 20.00,  43.50, 1.00), ( 39.05,  43.50, 1.00), ( 58.10,  43.50, 1.00), ( 77.15,  43.50, 1.00),
+    ( 96.20,  43.50, 1.00), (115.25,  43.50, 1.00), (134.30,  43.50, 1.00), (153.35,  43.50, 1.00),
+    (172.40,  43.50, 1.00), (191.45,  43.50, 1.00), (210.50,  43.50, 1.00), (229.55,  43.50, 1.00),
+    (248.60,  43.50, 1.00), (281.00,  43.50, 1.00), (300.05,  43.50, 1.00), (319.10,  43.50, 1.00),
+    (339.50,  43.50, 1.00),
+    # Row 2: QWERTY Row (y = 61.00) + Numpad Row 2
+    ( 24.76,  61.00, 1.50), ( 48.58,  61.00, 1.00), ( 67.63,  61.00, 1.00), ( 86.68,  61.00, 1.00),
+    (105.73,  61.00, 1.00), (124.78,  61.00, 1.00), (143.83,  61.00, 1.00), (162.88,  61.00, 1.00),
+    (181.93,  61.00, 1.00), (200.98,  61.00, 1.00), (220.03,  61.00, 1.00), (239.08,  61.00, 1.00),
+    (258.13,  61.00, 1.00), (281.00,  61.00, 1.00), (300.05,  61.00, 1.00), (319.10,  61.00, 1.00),
+    (339.50,  61.00, 1.00),
+    # Row 3: Home Row (y = 78.50) + Numpad Row 3
+    ( 27.14,  78.50, 1.75), ( 53.34,  78.50, 1.00), ( 72.39,  78.50, 1.00), ( 91.44,  78.50, 1.00),
+    (110.49,  78.50, 1.00), (129.54,  78.50, 1.00), (148.59,  78.50, 1.00), (167.64,  78.50, 1.00),
+    (186.69,  78.50, 1.00), (205.74,  78.50, 1.00), (224.79,  78.50, 1.00), (243.84,  78.50, 1.00),
+    (281.00,  78.50, 1.00), (300.05,  78.50, 1.00), (319.10,  78.50, 1.00), (339.50,  78.50, 1.00),
+    # Row 4: Shift Row (y = 96.00) + Numpad Row 4
+    ( 29.52,  96.00, 2.00), ( 58.10,  96.00, 1.00), ( 77.15,  96.00, 1.00), ( 96.20,  96.00, 1.00),
+    (115.25,  96.00, 1.00), (134.30,  96.00, 1.00), (153.35,  96.00, 1.00), (172.40,  96.00, 1.00),
+    (191.45,  96.00, 1.00), (210.50,  96.00, 1.00), (229.55,  96.00, 1.00), (253.36,  96.00, 1.50),
+    (281.00,  96.00, 1.00), (300.05,  96.00, 1.00), (319.10,  96.00, 1.00), (339.50,  96.00, 1.00),
+    # Row 5: Bottom Spacebar Row (y = 113.50, with 6.25U Spacebar at x = 153.65)
+    ( 24.76, 113.50, 1.50), ( 50.95, 113.50, 1.25), ( 74.76, 113.50, 1.25),
+    (153.65, 113.50, 6.25), (227.47, 113.50, 1.50)
 ]
 
 # ============================================================================
@@ -80,22 +113,14 @@ def build_bottom_case():
     # Rear I/O Connector Cutouts + PicoPSU 12V DC Jack & Power Switch
     rear_z = floor_t + standoff_h + pcb_t
     cutouts = []
-    # X2 DB9 Joystick/Mouse (X_pcb = 38.6)
     cutouts.append(Part.makeBox(32.0, wall_t + 4.0, 15.0, App.Vector(pcb_to_cad_x(38.6) - 16.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    # X5 Audio/RGB DIN connectors (X_pcb = 60..92)
     cutouts.append(Part.makeBox(44.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(60.0) - 10.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    # X1 Expansion Slot 62-pin (X_pcb = 113..197)
     cutouts.append(Part.makeBox(85.5, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(112.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
-    # X6 DIN connector (X_pcb = 211.0)
     cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(211.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    # X4 Floppy Slot 34-pin (X_pcb = 226..272)
     cutouts.append(Part.makeBox(47.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(225.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
-    # X7 Serial DIN-8 (X_pcb = 309.0)
     cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(309.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    # PicoPSU 12V DC Barrel Jack (D=11.4mm) at X_pcb = 365.0
     dc_jack = Part.makeCylinder(5.7, wall_t + 4.0, App.Vector(pcb_to_cad_x(365.0), ext_d + 2.0, rear_z + 6.0), App.Vector(0, -1, 0))
     cutouts.append(dc_jack)
-    # Rear Power Rocker Switch (19.4 x 13.2 mm) at X_pcb = 380.0
     cutouts.append(Part.makeBox(19.4, wall_t + 4.0, 13.2, App.Vector(pcb_to_cad_x(380.0), ext_d - wall_t - 2.0, rear_z)))
 
     # Side ventilation slots
@@ -122,7 +147,6 @@ def build_bottom_case():
         hole = Part.makeCylinder(1.45, standoff_h + 1.0, App.Vector(cx, cy, floor_t))
         adds.append(cone.cut(hole))
         if is_kb:
-            # Coaxial upper sleeve transferring typing force from Keyboard PCB/Plate to Motherboard standoff
             z_col = floor_t + standoff_h + pcb_t
             col_outer = Part.makeCylinder(3.6, 18.0, App.Vector(cx, cy, z_col))
             col_inner = Part.makeCylinder(1.65, 18.5, App.Vector(cx, cy, z_col - 0.2))
@@ -140,10 +164,9 @@ def build_bottom_case():
     return tray
 
 # ============================================================================
-# BUILD PART 2: SLOPED TOP COVER WITH ORTHOGONAL ANTI-FLEX KEYBOARD RIBS
+# BUILD PART 2: SLOPED TOP COVER WITH ANTI-FLEX KEYBOARD RIBS
 # ============================================================================
 def make_wedge(w, d, h_front, h_rear, y_flat_rear=140.0):
-    # Profile in YZ plane extruded along X
     pts = [
         App.Vector(0, 0, 0),
         App.Vector(0, d, 0),
@@ -179,32 +202,35 @@ def build_top_cover():
     ledge = ledge_outer.cut(ledge_inner)
     cover = cover.fuse(ledge)
 
-    # 2 Transverse Anti-Flex Support Ribs under the Keyboard Plate (aligned with x=128.8 and x=248.8)
-    for kx in (kb_origin_x + 128.8, kb_origin_x + 248.8):
-        rib_x = Part.makeBox(3.0, kb_d, ledge_z - 1.5, App.Vector(kx - 1.5, kb_origin_y, 0))
-        cover = cover.fuse(rib_x)
+    # Transverse Anti-Flex Support Rib in the 13.0mm divider channel between Alpha block and Numpad (x_kb = 269.5)
+    kx = kb_origin_x + 269.5
+    rib_x = Part.makeBox(3.0, kb_d, ledge_z - 1.5, App.Vector(kx - 1.5, kb_origin_y, 0))
+    cover = cover.fuse(rib_x)
 
-    # 2 Longitudinal Anti-Flex Support Ribs between key rows
-    for ky in (kb_origin_y + (kb_d - 54.8), kb_origin_y + (kb_d - 89.2)):
-        rib_y = Part.makeBox(kb_w, 2.4, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.2, 0))
+    # 3 Longitudinal Anti-Flex Support Ribs between staggered key rows (y_kb = 34.75, 69.75, 104.75)
+    for y_kb_rib in (34.75, 69.75, 104.75):
+        ky = kb_origin_y + (kb_d - y_kb_rib)
+        rib_y = Part.makeBox(kb_w, 2.2, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.1, 0))
         cover = cover.fuse(rib_y)
 
     return cover
 
 # ============================================================================
-# BUILD PART 3: 1.5mm CHERRY MX SWITCH MOUNTING PLATE (82 Cutouts + 10 M3 Holes)
+# BUILD PART 3: 1.5mm STAGGERED CHERRY MX SWITCH PLATE (83 Cutouts + 6.25U Stabilizer Cutouts + 10 M3 Holes)
 # ============================================================================
 def build_switch_plate():
     plate = Part.makeBox(kb_w, kb_d, plate_t)
     sw_cut = 14.0
     holes = []
-    for py in range(6):
-        for px in range(14):
-            if py == 5 and px in (11, 12):
-                continue
-            cx = 24.0 + px * 24.0
-            cy = kb_d - (29.0 + py * 17.2)
-            holes.append(Part.makeBox(sw_cut, sw_cut, plate_t + 2.0, App.Vector(cx - sw_cut/2.0, cy - sw_cut/2.0, -1.0)))
+    for x_kb, y_kb, wu in staggered_switches:
+        cx = x_kb
+        cy = kb_d - y_kb
+        # Central 14.0 x 14.0 mm Cherry MX switch cutout
+        holes.append(Part.makeBox(sw_cut, sw_cut, plate_t + 2.0, App.Vector(cx - sw_cut/2.0, cy - sw_cut/2.0, -1.0)))
+        # For the 6.25U Spacebar (wu == 6.25), add left & right Cherry MX stabilizer cutouts at +-50.0mm
+        if wu >= 6.0:
+            for sx_off in (-50.0, 50.0):
+                holes.append(Part.makeBox(6.8, 13.8, plate_t + 2.0, App.Vector(cx + sx_off - 3.4, cy - 6.9, -1.0)))
 
     for mx, my in kb_mh_coords:
         holes.append(Part.makeCylinder(1.6, plate_t + 2.0, App.Vector(mx, kb_d - my, -1.0)))
@@ -212,7 +238,7 @@ def build_switch_plate():
     plate = plate.cut(Part.makeCompound(holes))
     return plate
 
-print("Building Bottom Case, Top Cover, and 1.5mm Switch Plate B-Rep solids...")
+print("Building Bottom Case, Top Cover, and 1.5mm Staggered Switch Plate B-Rep solids...")
 bottom_shape = build_bottom_case()
 top_shape    = build_top_cover()
 plate_shape  = build_switch_plate()
