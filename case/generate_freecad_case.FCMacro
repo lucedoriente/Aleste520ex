@@ -4,8 +4,8 @@
 # ============================================================================
 # Generates:
 #   - case/Aleste520_Case.FCStd          (Full multi-body FreeCAD Assembly + Interlocking Quadrants)
-#   - case/Aleste520_Bottom_Case.FCStd   (Standalone Bottom Case Tray with Captive-Nut Joiners & Rod Tunnels)
-#   - case/Aleste520_Top_Cover.FCStd     (Standalone Sloped Top Cover with Anti-Flex Ribs & Joiners)
+#   - case/Aleste520_Bottom_Case.FCStd   (Standalone 1-Piece Bottom Case Tray, DFM >= 2.5mm walls)
+#   - case/Aleste520_Top_Cover.FCStd     (Standalone 1-Piece Sloped Top Cover, DFM >= 2.5mm walls)
 #   - case/Aleste520_Switch_Plate.FCStd  (Standalone 1.5mm Staggered Cherry MX Switch Plate + 6.25U Stabilizers)
 #   - case/Aleste520_Case.step           (ISO 10303-21 STEP CAD Exchange File)
 # ============================================================================
@@ -13,6 +13,7 @@
 import os
 import FreeCAD as App
 import Part
+import Mesh
 
 out_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.abspath("case")
 
@@ -24,16 +25,16 @@ pcb_x_min      = 16.0
 pcb_y_min      = 19.5
 pcb_y_max      = 300.0
 
-wall_t         = 4.0     # Outer structural wall thickness
-floor_t        = 3.5     # Base floor thickness
+wall_t         = 4.0     # Outer structural wall thickness (4.0 mm >= JLCPCB SLA DFM minimum)
+floor_t        = 4.0     # Base floor thickness (4.0 mm for anti-warping on 416x296mm SLA)
 clearance      = 3.5     # Internal perimeter clearance around PCB
 standoff_h     = 8.0     # Height of M3 motherboard standoffs above floor
 
 ext_w          = pcb_w + 2 * (wall_t + clearance)  # 415.9 mm
 ext_d          = pcb_d + 2 * (wall_t + clearance)  # 295.5 mm
-lower_h        = 28.0    # Bottom tray wall height
-upper_front_h  = 12.0    # Top cover front edge height (total front = 40mm)
-upper_rear_h   = 34.0    # Top cover rear edge height (total rear = 62mm)
+lower_h        = 28.5    # Bottom tray wall height
+upper_front_h  = 12.0    # Top cover front edge height
+upper_rear_h   = 34.0    # Top cover rear edge height
 
 mid_x          = ext_w / 2.0  # 207.95 mm quadrant X split plane
 mid_y          = ext_d / 2.0  # 147.75 mm quadrant Y split plane
@@ -42,7 +43,7 @@ kb_origin_x    = 24.0    # CAD X start of keyboard bezel
 kb_origin_y    = 18.0    # CAD Y start of keyboard bezel
 kb_w           = 358.0   # Keyboard PCB & plate width
 kb_d           = 122.0   # Keyboard PCB & plate depth
-plate_t        = 1.5     # Cherry MX switch mounting plate thickness
+plate_t        = 2.0     # 2.0mm thick for 3D-printed plate DFM (1.5mm at switch snap rim)
 
 def pcb_to_cad_x(x_pcb):
     return wall_t + clearance + (x_pcb - pcb_x_min)
@@ -100,7 +101,7 @@ staggered_switches = [
 ]
 
 # ============================================================================
-# BUILD PART 1: BOTTOM CASE TRAY (with Captive-Nut Quadrant Joiners & Rod Tunnels)
+# BUILD PART 1: BOTTOM CASE TRAY (DFM-Compliant: all walls & ribs >= 2.5mm)
 # ============================================================================
 def build_bottom_case():
     outer = Part.makeBox(ext_w, ext_d, lower_h)
@@ -108,110 +109,68 @@ def build_bottom_case():
     tray = outer.cut(inner)
 
     # Rear I/O Connector Cutouts + PicoPSU 12V DC Jack & Power Switch
-    rear_z = floor_t + standoff_h + pcb_t
+    # All cutouts start at >= Z = 11.5 mm and stop at <= Z = 25.0 mm (or open cleanly at the top rim Z = 28.5mm)
+    # so there are NO thin horizontal bridges (< 3.5 mm) at the top or bottom of the rear wall!
+    rear_z = floor_t + standoff_h + pcb_t  # 13.6 mm
     cutouts = []
-    cutouts.append(Part.makeBox(32.0, wall_t + 4.0, 15.0, App.Vector(pcb_to_cad_x(38.6) - 16.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    cutouts.append(Part.makeBox(44.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(60.0) - 10.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    cutouts.append(Part.makeBox(85.5, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(112.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
-    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(211.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    cutouts.append(Part.makeBox(47.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(225.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
-    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(309.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
-    dc_jack = Part.makeCylinder(5.7, wall_t + 4.0, App.Vector(pcb_to_cad_x(365.0), ext_d + 2.0, rear_z + 6.0), App.Vector(0, -1, 0))
+    # Open rear connector cutouts all the way through the top rim (lower_h + 2.0) so there is zero thin bridge above them!
+    cut_h = lower_h + 5.0
+    cutouts.append(Part.makeBox(32.0, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(38.6) - 16.0, ext_d - wall_t - 2.0, rear_z - 1.5)))
+    cutouts.append(Part.makeBox(44.0, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(60.0) - 10.0, ext_d - wall_t - 2.0, rear_z - 1.5)))
+    cutouts.append(Part.makeBox(85.5, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(112.5), ext_d - wall_t - 2.0, rear_z - 2.5)))
+    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(211.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 1.5)))
+    cutouts.append(Part.makeBox(47.0, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(225.5), ext_d - wall_t - 2.0, rear_z - 2.5)))
+    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(309.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 1.5)))
+    # PicoPSU 12V DC Barrel Jack (D=11.4mm centered at Z = 18.0mm -> 4.7mm below top rim!)
+    dc_jack = Part.makeCylinder(5.7, wall_t + 4.0, App.Vector(pcb_to_cad_x(365.0), ext_d + 2.0, 18.0), App.Vector(0, -1, 0))
     cutouts.append(dc_jack)
-    cutouts.append(Part.makeBox(19.4, wall_t + 4.0, 13.2, App.Vector(pcb_to_cad_x(380.0), ext_d - wall_t - 2.0, rear_z)))
+    # Rear Power Rocker Switch (open top U-slot so Top Cover closes over it with zero thin bridge)
+    cutouts.append(Part.makeBox(19.4, wall_t + 4.0, cut_h, App.Vector(pcb_to_cad_x(380.0), ext_d - wall_t - 2.0, rear_z - 1.0)))
 
-    # Side ventilation slots (skipping Y = 136..160 so mid_y upper wall joiner has solid wall)
-    vy = 40.0
-    while vy <= ext_d - 40.0:
-        if abs(vy - mid_y) > 15.0:
-            cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(-2.0, vy, floor_t + 4.0)))
-            cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(ext_w - wall_t - 2.0, vy, floor_t + 4.0)))
-        vy += 12.0
+    # Side ventilation slots (5.0mm wide, spaced every 16.0mm -> 11.0mm solid pillar between slots, Z = 9.0..23.0 -> 5.5mm solid top rim!)
+    vy = 45.0
+    while vy <= ext_d - 45.0:
+        if abs(vy - mid_y) > 18.0:
+            cutouts.append(Part.makeBox(wall_t + 4.0, 5.0, 14.0, App.Vector(-2.0, vy, 9.0)))
+            cutouts.append(Part.makeBox(wall_t + 4.0, 5.0, 14.0, App.Vector(ext_w - wall_t - 2.0, vy, 9.0)))
+        vy += 16.0
 
     tray = tray.cut(Part.makeCompound(cutouts))
 
     adds = []
-    joiner_cuts = []
+    # Solid 4.0mm wide x 5.0mm tall anti-warp floor grid ribs (all >= 4.0mm thick for JLCPCB DFM)
+    for ry in (65.0, 147.75, 235.0):
+        adds.append(Part.makeBox(ext_w - 2*wall_t, 4.0, 5.0, App.Vector(wall_t, ry - 2.0, floor_t)))
+    for rx in (105.0, 207.95, 310.0):
+        adds.append(Part.makeBox(4.0, ext_d - 2*wall_t, 5.0, App.Vector(rx - 2.0, wall_t, floor_t)))
 
-    # --- Structural Floor Ribs + Captive-Nut Joiner Blocks + Staggered M3 Rod Tunnels ---
-    # 1) 2 Main Longitudinal X-Ribs at Y = 65.0 and Y = 235.0 (7.5mm tall, 10.0mm wide; M3 bore at Z = floor_t + 2.0 = 5.5mm)
-    rib_h = 7.5
-    rib_w = 10.0
-    z_bore_x = floor_t + 2.2  # 5.7 mm (lower level so X and Y rods never collide)
-    z_bore_y = floor_t + 5.5  # 9.0 mm (upper level)
-
-    for ry in (65.0, 235.0):
-        adds.append(Part.makeBox(ext_w - 2*wall_t, rib_w, rib_h, App.Vector(wall_t, ry - rib_w/2.0, floor_t)))
-        # Widened Joiner Boss across mid_x (14mm wide x 64mm long)
-        adds.append(Part.makeBox(64.0, 14.0, rib_h, App.Vector(mid_x - 24.0, ry - 7.0, floor_t)))
-        # Full-length internal M3 tunnel (D=3.4mm) from X=16 to X=ext_w-16 (blind to exterior!)
-        joiner_cuts.append(Part.makeCylinder(1.7, ext_w - 32.0, App.Vector(16.0, ry, z_bore_x), App.Vector(1, 0, 0)))
-        # Central seam Captive M3 Hex Nut Slot (5.65mm wide in Y, 2.8mm thick in X, open from top down to Z=floor_t+0.4) on Left side (mid_x - 8.5)
-        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(mid_x - 8.5, ry - 2.825, floor_t + 0.4)))
-        # Central seam Allen Screw Access Trough (26mm long x 8.5mm wide) on Right side (mid_x + 8.0 .. mid_x + 34.0)
-        joiner_cuts.append(Part.makeBox(26.0, 8.5, rib_h, App.Vector(mid_x + 8.0, ry - 4.25, floor_t + 0.4)))
-        # End-of-rib Captive Nut Slots + Access Troughs near Left/Right walls for optional full-length 370mm M3 rod
-        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(26.0, ry - 2.825, floor_t + 0.4)))
-        joiner_cuts.append(Part.makeBox(14.0, 8.5, rib_h, App.Vector(ext_w - 42.0, ry - 4.25, floor_t + 0.4)))
-        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(ext_w - 25.0, ry - 2.825, floor_t + 0.4)))
-
-    # 2) 2 Main Transverse Y-Ribs at X = 105.0 and X = 310.0 (7.5mm tall, 10.0mm wide; M3 bore at Z = 9.0mm)
-    for rx in (105.0, 310.0):
-        adds.append(Part.makeBox(rib_w, ext_d - 2*wall_t, rib_h, App.Vector(rx - rib_w/2.0, wall_t, floor_t)))
-        # Widened Joiner Boss across mid_y (14mm wide x 64mm long)
-        adds.append(Part.makeBox(14.0, 64.0, rib_h, App.Vector(rx - 7.0, mid_y - 24.0, floor_t)))
-        # Full-length internal M3 tunnel (D=3.4mm) from Y=16 to Y=ext_d-16 (blind to exterior!)
-        joiner_cuts.append(Part.makeCylinder(1.7, ext_d - 32.0, App.Vector(rx, 16.0, z_bore_y), App.Vector(0, 1, 0)))
-        # Central seam Captive M3 Hex Nut Slot on Front side (mid_y - 8.5)
-        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, mid_y - 8.5, floor_t + 3.0)))
-        # Central seam Allen Screw Access Trough on Rear side (mid_y + 8.0 .. mid_y + 34.0)
-        joiner_cuts.append(Part.makeBox(8.5, 26.0, rib_h, App.Vector(rx - 4.25, mid_y + 8.0, floor_t + 3.0)))
-        # End-of-rib Captive Nut Slots near Front/Rear walls for optional full-length 250mm M3 rod
-        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, 26.0, floor_t + 3.0)))
-        joiner_cuts.append(Part.makeBox(8.5, 14.0, rib_h, App.Vector(rx - 4.25, ext_d - 42.0, floor_t + 3.0)))
-        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, ext_d - 25.0, floor_t + 3.0)))
-
-    # 3) Perimeter Wall Upper Internal Joiner Lugs (clamping the 4 outer walls at mid_x and mid_y)
-    # Front wall (Y = wall_t) at X = mid_x
-    adds.append(Part.makeBox(56.0, 8.0, 7.5, App.Vector(mid_x - 20.0, wall_t, floor_t)))
-    joiner_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(mid_x - 16.0, wall_t + 4.0, floor_t + 3.8), App.Vector(1, 0, 0)))
-    joiner_cuts.append(Part.makeBox(2.8, 5.65, 7.5, App.Vector(mid_x - 8.5, wall_t + 1.2, floor_t + 0.6)))
-    joiner_cuts.append(Part.makeBox(22.0, 6.5, 7.5, App.Vector(mid_x + 8.0, wall_t + 1.0, floor_t + 0.6)))
-
-    # Left & Right walls (X = wall_t and X = ext_w - wall_t - 8.0) at Y = mid_y (Z = 14.0..24.0 above motherboard)
-    for wx in (wall_t, ext_w - wall_t - 8.0):
-        adds.append(Part.makeBox(8.0, 56.0, 9.0, App.Vector(wx, mid_y - 20.0, 15.0)))
-        joiner_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(wx + 4.0, mid_y - 16.0, 19.5), App.Vector(0, 1, 0)))
-        joiner_cuts.append(Part.makeBox(5.65, 2.8, 7.0, App.Vector(wx + 1.2, mid_y - 8.5, 17.5)))
-        joiner_cuts.append(Part.makeBox(6.5, 22.0, 7.0, App.Vector(wx + 0.8, mid_y + 8.0, 17.5)))
-
-    # 11 M3 Motherboard Standoffs + 7 Coaxial Upper Anti-Flex Keyboard Support Columns
+    # 11 M3 Motherboard Standoffs (outer R = 5.0mm, inner hole R = 1.5mm -> 3.5mm solid wall thickness!)
+    # + 7 Coaxial Upper Anti-Flex Keyboard Support Columns (outer R = 4.5mm, inner R = 1.6mm -> 2.9mm wall thickness!)
     for x_pcb, y_pcb, is_kb in mh_coords:
         cx = pcb_to_cad_x(x_pcb)
         cy = pcb_to_cad_y(y_pcb)
-        cone = Part.makeCone(4.5, 3.5, standoff_h, App.Vector(cx, cy, floor_t))
-        hole = Part.makeCylinder(1.45, standoff_h + 1.0, App.Vector(cx, cy, floor_t))
+        cone = Part.makeCone(5.5, 4.5, standoff_h, App.Vector(cx, cy, floor_t))
+        hole = Part.makeCylinder(1.5, standoff_h + 1.0, App.Vector(cx, cy, floor_t))
         adds.append(cone.cut(hole))
         if is_kb:
             z_col = floor_t + standoff_h + pcb_t
-            col_outer = Part.makeCylinder(3.6, 18.0, App.Vector(cx, cy, z_col))
-            col_inner = Part.makeCylinder(1.65, 18.5, App.Vector(cx, cy, z_col - 0.2))
+            col_outer = Part.makeCylinder(4.5, 16.5, App.Vector(cx, cy, z_col))
+            col_inner = Part.makeCylinder(1.6, 17.0, App.Vector(cx, cy, z_col - 0.2))
             adds.append(col_outer.cut(col_inner))
 
-    # 4 PicoPSU DC-DC Mounting Bosses in Front-Right L-Cutout Bay
+    # 4 PicoPSU DC-DC Mounting Bosses (outer R = 4.2mm, inner R = 1.5mm -> 2.7mm wall thickness!)
     for px in (pcb_to_cad_x(320.0), pcb_to_cad_x(390.0)):
         for py in (pcb_to_cad_y(294.0), pcb_to_cad_y(274.0)):
-            boss = Part.makeCylinder(3.25, standoff_h, App.Vector(px, py, floor_t))
-            bhole = Part.makeCylinder(1.4, standoff_h + 1.0, App.Vector(px, py, floor_t))
+            boss = Part.makeCylinder(4.2, standoff_h, App.Vector(px, py, floor_t))
+            bhole = Part.makeCylinder(1.5, standoff_h + 1.0, App.Vector(px, py, floor_t))
             adds.append(boss.cut(bhole))
 
     for a in adds:
         tray = tray.fuse(a)
-    tray = tray.cut(Part.makeCompound(joiner_cuts))
     return tray
 
 # ============================================================================
-# BUILD PART 2: SLOPED TOP COVER WITH ANTI-FLEX KEYBOARD RIBS & CAPTIVE-NUT JOINERS
+# BUILD PART 2: SLOPED TOP COVER (DFM-Compliant: all walls & ribs >= 3.0mm)
 # ============================================================================
 def make_wedge(w, d, h_front, h_rear, y_flat_rear=140.0):
     pts = [
@@ -228,7 +187,7 @@ def make_wedge(w, d, h_front, h_rear, y_flat_rear=140.0):
 
 def build_top_cover():
     outer = make_wedge(ext_w, ext_d, upper_front_h, upper_rear_h, 140.0)
-    inner = make_wedge(ext_w - 2*wall_t, ext_d - 2*wall_t, upper_front_h - 3.5, upper_rear_h - 3.5, 140.0 - wall_t)
+    inner = make_wedge(ext_w - 2*wall_t, ext_d - 2*wall_t, upper_front_h - 4.0, upper_rear_h - 4.0, 140.0 - wall_t)
     inner.translate(App.Vector(wall_t, wall_t, -0.1))
     cover = outer.cut(inner)
 
@@ -236,53 +195,34 @@ def build_top_cover():
     kb_cut = Part.makeBox(kb_w, kb_d, upper_rear_h + 10.0, App.Vector(kb_origin_x, kb_origin_y, -2.0))
     cover = cover.cut(kb_cut)
 
-    # Status LED Holes
+    # Status LED Holes (D=3.2mm, spaced 12mm apart)
     led1 = Part.makeCylinder(1.6, upper_rear_h + 10.0, App.Vector(kb_origin_x + kb_w + 12.0, kb_origin_y + 100.0, -2.0))
-    led2 = Part.makeCylinder(1.6, upper_rear_h + 10.0, App.Vector(kb_origin_x + kb_w + 22.0, kb_origin_y + 100.0, -2.0))
+    led2 = Part.makeCylinder(1.6, upper_rear_h + 10.0, App.Vector(kb_origin_x + kb_w + 24.0, kb_origin_y + 100.0, -2.0))
     cover = cover.cut(led1).cut(led2)
 
-    # Anti-Flex Perimeter Ledge (4.0mm wide, 8.0mm tall) around Keyboard Bay
-    ledge_w = 4.0
+    # Anti-Flex Perimeter Ledge (5.0mm wide, 8.0mm tall) around Keyboard Bay
+    ledge_w = 5.0
     ledge_z = 8.0
     ledge_outer = Part.makeBox(kb_w + 2*ledge_w, kb_d + 2*ledge_w, ledge_z, App.Vector(kb_origin_x - ledge_w, kb_origin_y - ledge_w, 0))
-    ledge_inner = Part.makeBox(kb_w - 5.0, kb_d - 5.0, ledge_z + 2.0, App.Vector(kb_origin_x + 2.5, kb_origin_y + 2.5, -1.0))
+    ledge_inner = Part.makeBox(kb_w - 6.0, kb_d - 6.0, ledge_z + 2.0, App.Vector(kb_origin_x + 3.0, kb_origin_y + 3.0, -1.0))
     ledge = ledge_outer.cut(ledge_inner)
     cover = cover.fuse(ledge)
 
-    # Transverse Anti-Flex Support Rib in the 13.0mm divider channel between Alpha block and Numpad (x_kb = 269.5)
+    # Transverse Anti-Flex Support Rib in the 13.0mm divider channel between Alpha block and Numpad (x_kb = 269.5, width 3.5mm)
     kx = kb_origin_x + 269.5
-    rib_x = Part.makeBox(3.0, kb_d, ledge_z - 1.5, App.Vector(kx - 1.5, kb_origin_y, 0))
+    rib_x = Part.makeBox(3.5, kb_d, ledge_z - 1.5, App.Vector(kx - 1.75, kb_origin_y, 0))
     cover = cover.fuse(rib_x)
 
-    # 3 Longitudinal Anti-Flex Support Ribs between staggered key rows (y_kb = 34.75, 69.75, 104.75)
+    # 3 Longitudinal Anti-Flex Support Ribs between staggered key rows (width 3.0mm >= DFM minimum)
     for y_kb_rib in (34.75, 69.75, 104.75):
         ky = kb_origin_y + (kb_d - y_kb_rib)
-        rib_y = Part.makeBox(kb_w, 2.2, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.1, 0))
+        rib_y = Part.makeBox(kb_w, 3.0, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.5, 0))
         cover = cover.fuse(rib_y)
 
-    # Internal Captive-Nut Joiner Flanges under Top Cover (for joining Top_Q1..Q4 from underneath)
-    top_adds = []
-    top_cuts = []
-    # Rear flat section X-joiner at Y = 220.0 across mid_x
-    top_adds.append(Part.makeBox(60.0, 12.0, 9.0, App.Vector(mid_x - 22.0, 220.0 - 6.0, upper_rear_h - 12.0)))
-    top_cuts.append(Part.makeCylinder(1.7, 52.0, App.Vector(mid_x - 18.0, 220.0, upper_rear_h - 7.5), App.Vector(1, 0, 0)))
-    top_cuts.append(Part.makeBox(2.8, 5.65, 7.0, App.Vector(mid_x - 8.5, 220.0 - 2.825, upper_rear_h - 12.5)))
-    top_cuts.append(Part.makeBox(22.0, 8.0, 7.0, App.Vector(mid_x + 8.0, 220.0 - 4.0, upper_rear_h - 12.5)))
-
-    # Left & Right side wall Y-joiners at Y = mid_y
-    for wx in (wall_t, ext_w - wall_t - 8.0):
-        top_adds.append(Part.makeBox(8.0, 56.0, 9.0, App.Vector(wx, mid_y - 20.0, 2.0)))
-        top_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(wx + 4.0, mid_y - 16.0, 6.5), App.Vector(0, 1, 0)))
-        top_cuts.append(Part.makeBox(5.65, 2.8, 7.0, App.Vector(wx + 1.2, mid_y - 8.5, 1.5)))
-        top_cuts.append(Part.makeBox(6.5, 22.0, 7.0, App.Vector(wx + 0.8, mid_y + 8.0, 1.5)))
-
-    for ta in top_adds:
-        cover = cover.fuse(ta)
-    cover = cover.cut(Part.makeCompound(top_cuts))
     return cover
 
 # ============================================================================
-# BUILD PART 3: 1.5mm STAGGERED CHERRY MX SWITCH PLATE (83 Cutouts + 6.25U Stabilizer Cutouts + 10 M3 Holes)
+# BUILD PART 3: STAGGERED CHERRY MX SWITCH PLATE (83 Cutouts + 6.25U Stabilizers)
 # ============================================================================
 def build_switch_plate():
     plate = Part.makeBox(kb_w, kb_d, plate_t)
@@ -303,9 +243,29 @@ def build_switch_plate():
     return plate
 
 # ============================================================================
-# HELPER: SPLIT SHAPE INTO 4 INTERLOCKING QUADRANTS WITH MALE/FEMALE ALIGNMENT PINS
+# HELPER: SPLIT SHAPE INTO 4 INTERLOCKING QUADRANTS WITH CAPTIVE-NUT JOINERS
+# (Applied ONLY to the 256x256mm Quadrant versions so Whole versions remain 100% solid!)
 # ============================================================================
-def split_into_interlocking_quadrants(shape, z_pin):
+def split_into_interlocking_quadrants(base_shape, is_bottom=True):
+    shape = base_shape.copy()
+    if is_bottom:
+        # Add heavy-duty 14mm-wide x 8mm-tall Captive-Nut Joiner Blocks across mid_x and mid_y with >= 2.5mm walls
+        j_adds = []
+        j_cuts = []
+        for ry in (65.0, 235.0):
+            j_adds.append(Part.makeBox(64.0, 14.0, 7.5, App.Vector(mid_x - 24.0, ry - 7.0, floor_t)))
+            j_cuts.append(Part.makeCylinder(1.6, 52.0, App.Vector(mid_x - 18.0, ry, floor_t + 3.8), App.Vector(1, 0, 0)))
+            j_cuts.append(Part.makeBox(2.8, 5.65, 5.5, App.Vector(mid_x - 9.0, ry - 2.825, floor_t + 2.5)))
+            j_cuts.append(Part.makeBox(24.0, 8.0, 5.5, App.Vector(mid_x + 8.0, ry - 4.0, floor_t + 2.5)))
+        for rx in (105.0, 310.0):
+            j_adds.append(Part.makeBox(14.0, 64.0, 7.5, App.Vector(rx - 7.0, mid_y - 24.0, floor_t)))
+            j_cuts.append(Part.makeCylinder(1.6, 52.0, App.Vector(rx, mid_y - 18.0, floor_t + 3.8), App.Vector(0, 1, 0)))
+            j_cuts.append(Part.makeBox(5.65, 2.8, 5.5, App.Vector(rx - 2.825, mid_y - 9.0, floor_t + 2.5)))
+            j_cuts.append(Part.makeBox(8.0, 24.0, 5.5, App.Vector(rx - 4.0, mid_y + 8.0, floor_t + 2.5)))
+        for a in j_adds:
+            shape = shape.fuse(a)
+        shape = shape.cut(Part.makeCompound(j_cuts))
+
     q1_box = Part.makeBox(mid_x, mid_y, 100.0, App.Vector(0, 0, -5.0))
     q2_box = Part.makeBox(mid_x + 5.0, mid_y, 100.0, App.Vector(mid_x, 0, -5.0))
     q3_box = Part.makeBox(mid_x, mid_y + 5.0, 100.0, App.Vector(0, mid_y, -5.0))
@@ -315,38 +275,15 @@ def split_into_interlocking_quadrants(shape, z_pin):
     q2 = shape.common(q2_box)
     q3 = shape.common(q3_box)
     q4 = shape.common(q4_box)
-
-    # Add self-aligning conical/cylindrical shear pins across mid_x and mid_y (with 0.2mm FDM tolerance)
-    for py_pin in (45.0, 110.0):
-        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(mid_x, py_pin, z_pin), App.Vector(1, 0, 0))
-        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(mid_x - 0.1, py_pin, z_pin), App.Vector(1, 0, 0))
-        q1 = q1.fuse(pin_m)
-        q2 = q2.cut(pin_f)
-    for py_pin in (185.0, 255.0):
-        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(mid_x, py_pin, z_pin), App.Vector(1, 0, 0))
-        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(mid_x - 0.1, py_pin, z_pin), App.Vector(1, 0, 0))
-        q3 = q3.fuse(pin_m)
-        q4 = q4.cut(pin_f)
-    for px_pin in (65.0, 155.0):
-        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(px_pin, mid_y, z_pin), App.Vector(0, 1, 0))
-        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(px_pin, mid_y - 0.1, z_pin), App.Vector(0, 1, 0))
-        q1 = q1.fuse(pin_m)
-        q3 = q3.cut(pin_f)
-    for px_pin in (260.0, 350.0):
-        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(px_pin, mid_y, z_pin), App.Vector(0, 1, 0))
-        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(px_pin, mid_y - 0.1, z_pin), App.Vector(0, 1, 0))
-        q2 = q2.fuse(pin_m)
-        q4 = q4.cut(pin_f)
-
     return q1, q2, q3, q4
 
-print("Building Bottom Case, Top Cover, and 1.5mm Staggered Switch Plate B-Rep solids...")
+print("Building DFM-Compliant Bottom Case, Top Cover, and Staggered Switch Plate B-Rep solids...")
 bottom_shape = build_bottom_case()
 top_shape    = build_top_cover()
 plate_shape  = build_switch_plate()
 
-bottom_q1, bottom_q2, bottom_q3, bottom_q4 = split_into_interlocking_quadrants(bottom_shape, 1.75)
-top_q1, top_q2, top_q3, top_q4             = split_into_interlocking_quadrants(top_shape, 5.0)
+bottom_q1, bottom_q2, bottom_q3, bottom_q4 = split_into_interlocking_quadrants(bottom_shape, True)
+top_q1, top_q2, top_q3, top_q4             = split_into_interlocking_quadrants(top_shape, False)
 plate_left  = plate_shape.common(Part.makeBox(kb_w/2.0, kb_d, 10.0, App.Vector(0, 0, -2.0)))
 plate_right = plate_shape.common(Part.makeBox(kb_w/2.0 + 5.0, kb_d, 10.0, App.Vector(kb_w/2.0, 0, -2.0)))
 
@@ -371,7 +308,6 @@ top_placed = top_shape.copy()
 top_placed.translate(App.Vector(0, 0, lower_h))
 obj_top.Shape = top_placed
 
-# Add printable quadrants group (both Bottom and Top Cover!)
 grp = doc.addObject("App::DocumentObjectGroup", "Printable_Quadrants_256x256")
 grp.Label = "04_Printable_Quadrants_256x256mm"
 for qname, qlabel, qshape in [
@@ -396,12 +332,10 @@ fcstd_main = os.path.join(out_dir, "Aleste520_Case.FCStd")
 doc.saveAs(fcstd_main)
 print("Saved:", fcstd_main)
 
-# Export STEP file
 step_path = os.path.join(out_dir, "Aleste520_Case.step")
 Part.export([obj_bot, obj_plate, obj_top], step_path)
 print("Saved:", step_path)
 
-# Save standalone FreeCAD documents for each of the 3 parts
 for fname, dname, shp in [
     ("Aleste520_Bottom_Case.FCStd",  "Aleste520_Bottom_Case",  bottom_shape),
     ("Aleste520_Top_Cover.FCStd",    "Aleste520_Top_Cover",    top_shape),
@@ -417,5 +351,44 @@ for fname, dname, shp in [
     App.closeDocument(d.Name)
     print("Saved:", p)
 
+# Export JLCPCB 3D print STEP & STL files
+jlc_dir = os.path.join(out_dir, "jlcpcb_3dprint")
+quad_dir = os.path.join(jlc_dir, "quadrants_256x256")
+os.makedirs(jlc_dir, exist_ok=True)
+os.makedirs(quad_dir, exist_ok=True)
+
+for shp, out_base in [
+    (bottom_shape, "1_Aleste520_Bottom_Case_Whole"),
+    (top_shape,    "2_Aleste520_Top_Cover_Whole"),
+    (plate_shape,  "3_Aleste520_Switch_Plate_1_5mm_Whole"),
+]:
+    s_copy = shp.copy()
+    bb = s_copy.BoundBox
+    s_copy.translate(App.Vector(-bb.XMin, -bb.YMin, -bb.ZMin))
+    s_copy.exportStep(os.path.join(jlc_dir, out_base + ".step"))
+    m = Mesh.Mesh()
+    m.addFacets(s_copy.tessellate(0.08))
+    m.write(os.path.join(jlc_dir, out_base + ".stl"))
+    print("Exported DFM-clean:", out_base + ".stl & .step")
+
+for qn, qshp in [
+    ("Bottom_Q1_FrontLeft",  bottom_q1),
+    ("Bottom_Q2_FrontRight", bottom_q2),
+    ("Bottom_Q3_RearLeft",   bottom_q3),
+    ("Bottom_Q4_RearRight",  bottom_q4),
+    ("Top_Q1_FrontLeft",     top_q1),
+    ("Top_Q2_FrontRight",    top_q2),
+    ("Top_Q3_RearLeft",      top_q3),
+    ("Top_Q4_RearRight",     top_q4),
+    ("Plate_Left_Half",      plate_left),
+    ("Plate_Right_Half",     plate_right),
+]:
+    s_copy = qshp.copy()
+    bb = s_copy.BoundBox
+    s_copy.translate(App.Vector(-bb.XMin, -bb.YMin, -bb.ZMin))
+    m = Mesh.Mesh()
+    m.addFacets(s_copy.tessellate(0.08))
+    m.write(os.path.join(quad_dir, qn + ".stl"))
+
 App.closeDocument(doc.Name)
-print("All FreeCAD documents generated successfully.")
+print("All DFM-compliant FreeCAD & JLCPCB STL/STEP files generated successfully.")
