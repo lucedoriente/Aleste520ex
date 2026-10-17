@@ -3,9 +3,9 @@
 # ALESTE 520EX — Native FreeCAD 1.1 Parametric 3D Case & Staggered Switch Plate
 # ============================================================================
 # Generates:
-#   - case/Aleste520_Case.FCStd          (Full multi-body FreeCAD Assembly + Split Quadrants)
-#   - case/Aleste520_Bottom_Case.FCStd   (Standalone Bottom Case Tray)
-#   - case/Aleste520_Top_Cover.FCStd     (Standalone Sloped Top Cover with Anti-Flex Ribs)
+#   - case/Aleste520_Case.FCStd          (Full multi-body FreeCAD Assembly + Interlocking Quadrants)
+#   - case/Aleste520_Bottom_Case.FCStd   (Standalone Bottom Case Tray with Captive-Nut Joiners & Rod Tunnels)
+#   - case/Aleste520_Top_Cover.FCStd     (Standalone Sloped Top Cover with Anti-Flex Ribs & Joiners)
 #   - case/Aleste520_Switch_Plate.FCStd  (Standalone 1.5mm Staggered Cherry MX Switch Plate + 6.25U Stabilizers)
 #   - case/Aleste520_Case.step           (ISO 10303-21 STEP CAD Exchange File)
 # ============================================================================
@@ -34,6 +34,9 @@ ext_d          = pcb_d + 2 * (wall_t + clearance)  # 295.5 mm
 lower_h        = 28.0    # Bottom tray wall height
 upper_front_h  = 12.0    # Top cover front edge height (total front = 40mm)
 upper_rear_h   = 34.0    # Top cover rear edge height (total rear = 62mm)
+
+mid_x          = ext_w / 2.0  # 207.95 mm quadrant X split plane
+mid_y          = ext_d / 2.0  # 147.75 mm quadrant Y split plane
 
 kb_origin_x    = 24.0    # CAD X start of keyboard bezel
 kb_origin_y    = 18.0    # CAD Y start of keyboard bezel
@@ -71,39 +74,33 @@ kb_mh_coords = [
 
 # 83 Staggered Switch Centers (x_kb, y_kb, width_u) matching keyboard/Aleste520_Keyboard.kicad_pcb
 staggered_switches = [
-    # Row 0: Function & Control Row (y = 26.00) + Isolated Reset
     ( 20.00,  26.00, 1.00), ( 44.00,  26.00, 1.25), ( 67.80,  26.00, 1.25), ( 91.60,  26.00, 1.25),
     (115.40,  26.00, 1.25), (139.20,  26.00, 1.25), (168.00,  26.00, 1.25), (191.80,  26.00, 1.25),
     (215.60,  26.00, 1.25), (239.40,  26.00, 1.25), (339.50,  26.00, 1.00),
-    # Row 1: Number Row (y = 43.50) + Numpad Row 1
     ( 20.00,  43.50, 1.00), ( 39.05,  43.50, 1.00), ( 58.10,  43.50, 1.00), ( 77.15,  43.50, 1.00),
     ( 96.20,  43.50, 1.00), (115.25,  43.50, 1.00), (134.30,  43.50, 1.00), (153.35,  43.50, 1.00),
     (172.40,  43.50, 1.00), (191.45,  43.50, 1.00), (210.50,  43.50, 1.00), (229.55,  43.50, 1.00),
     (248.60,  43.50, 1.00), (281.00,  43.50, 1.00), (300.05,  43.50, 1.00), (319.10,  43.50, 1.00),
     (339.50,  43.50, 1.00),
-    # Row 2: QWERTY Row (y = 61.00) + Numpad Row 2
     ( 24.76,  61.00, 1.50), ( 48.58,  61.00, 1.00), ( 67.63,  61.00, 1.00), ( 86.68,  61.00, 1.00),
     (105.73,  61.00, 1.00), (124.78,  61.00, 1.00), (143.83,  61.00, 1.00), (162.88,  61.00, 1.00),
     (181.93,  61.00, 1.00), (200.98,  61.00, 1.00), (220.03,  61.00, 1.00), (239.08,  61.00, 1.00),
     (258.13,  61.00, 1.00), (281.00,  61.00, 1.00), (300.05,  61.00, 1.00), (319.10,  61.00, 1.00),
     (339.50,  61.00, 1.00),
-    # Row 3: Home Row (y = 78.50) + Numpad Row 3
     ( 27.14,  78.50, 1.75), ( 53.34,  78.50, 1.00), ( 72.39,  78.50, 1.00), ( 91.44,  78.50, 1.00),
     (110.49,  78.50, 1.00), (129.54,  78.50, 1.00), (148.59,  78.50, 1.00), (167.64,  78.50, 1.00),
     (186.69,  78.50, 1.00), (205.74,  78.50, 1.00), (224.79,  78.50, 1.00), (243.84,  78.50, 1.00),
     (281.00,  78.50, 1.00), (300.05,  78.50, 1.00), (319.10,  78.50, 1.00), (339.50,  78.50, 1.00),
-    # Row 4: Shift Row (y = 96.00) + Numpad Row 4
     ( 29.52,  96.00, 2.00), ( 58.10,  96.00, 1.00), ( 77.15,  96.00, 1.00), ( 96.20,  96.00, 1.00),
     (115.25,  96.00, 1.00), (134.30,  96.00, 1.00), (153.35,  96.00, 1.00), (172.40,  96.00, 1.00),
     (191.45,  96.00, 1.00), (210.50,  96.00, 1.00), (229.55,  96.00, 1.00), (253.36,  96.00, 1.50),
     (281.00,  96.00, 1.00), (300.05,  96.00, 1.00), (319.10,  96.00, 1.00), (339.50,  96.00, 1.00),
-    # Row 5: Bottom Spacebar Row (y = 113.50, with 6.25U Spacebar at x = 153.65)
     ( 24.76, 113.50, 1.50), ( 50.95, 113.50, 1.25), ( 74.76, 113.50, 1.25),
     (153.65, 113.50, 6.25), (227.47, 113.50, 1.50)
 ]
 
 # ============================================================================
-# BUILD PART 1: BOTTOM CASE TRAY (with 11 M3 Standoffs, 7 Anti-Flex Columns & PicoPSU Bay)
+# BUILD PART 1: BOTTOM CASE TRAY (with Captive-Nut Quadrant Joiners & Rod Tunnels)
 # ============================================================================
 def build_bottom_case():
     outer = Part.makeBox(ext_w, ext_d, lower_h)
@@ -123,21 +120,70 @@ def build_bottom_case():
     cutouts.append(dc_jack)
     cutouts.append(Part.makeBox(19.4, wall_t + 4.0, 13.2, App.Vector(pcb_to_cad_x(380.0), ext_d - wall_t - 2.0, rear_z)))
 
-    # Side ventilation slots
+    # Side ventilation slots (skipping Y = 136..160 so mid_y upper wall joiner has solid wall)
     vy = 40.0
     while vy <= ext_d - 40.0:
-        cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(-2.0, vy, floor_t + 4.0)))
-        cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(ext_w - wall_t - 2.0, vy, floor_t + 4.0)))
+        if abs(vy - mid_y) > 15.0:
+            cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(-2.0, vy, floor_t + 4.0)))
+            cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(ext_w - wall_t - 2.0, vy, floor_t + 4.0)))
         vy += 12.0
 
     tray = tray.cut(Part.makeCompound(cutouts))
 
-    # Internal Floor Stiffening Grid Ribs + Standoffs
     adds = []
-    for rx in range(80, int(ext_w - 60), 80):
-        adds.append(Part.makeBox(2.4, ext_d - 2*wall_t, 3.0, App.Vector(rx, wall_t, floor_t)))
-    for ry in range(65, int(ext_d - 50), 65):
-        adds.append(Part.makeBox(ext_w - 2*wall_t, 2.4, 3.0, App.Vector(wall_t, ry, floor_t)))
+    joiner_cuts = []
+
+    # --- Structural Floor Ribs + Captive-Nut Joiner Blocks + Staggered M3 Rod Tunnels ---
+    # 1) 2 Main Longitudinal X-Ribs at Y = 65.0 and Y = 235.0 (7.5mm tall, 10.0mm wide; M3 bore at Z = floor_t + 2.0 = 5.5mm)
+    rib_h = 7.5
+    rib_w = 10.0
+    z_bore_x = floor_t + 2.2  # 5.7 mm (lower level so X and Y rods never collide)
+    z_bore_y = floor_t + 5.5  # 9.0 mm (upper level)
+
+    for ry in (65.0, 235.0):
+        adds.append(Part.makeBox(ext_w - 2*wall_t, rib_w, rib_h, App.Vector(wall_t, ry - rib_w/2.0, floor_t)))
+        # Widened Joiner Boss across mid_x (14mm wide x 64mm long)
+        adds.append(Part.makeBox(64.0, 14.0, rib_h, App.Vector(mid_x - 24.0, ry - 7.0, floor_t)))
+        # Full-length internal M3 tunnel (D=3.4mm) from X=16 to X=ext_w-16 (blind to exterior!)
+        joiner_cuts.append(Part.makeCylinder(1.7, ext_w - 32.0, App.Vector(16.0, ry, z_bore_x), App.Vector(1, 0, 0)))
+        # Central seam Captive M3 Hex Nut Slot (5.65mm wide in Y, 2.8mm thick in X, open from top down to Z=floor_t+0.4) on Left side (mid_x - 8.5)
+        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(mid_x - 8.5, ry - 2.825, floor_t + 0.4)))
+        # Central seam Allen Screw Access Trough (26mm long x 8.5mm wide) on Right side (mid_x + 8.0 .. mid_x + 34.0)
+        joiner_cuts.append(Part.makeBox(26.0, 8.5, rib_h, App.Vector(mid_x + 8.0, ry - 4.25, floor_t + 0.4)))
+        # End-of-rib Captive Nut Slots + Access Troughs near Left/Right walls for optional full-length 370mm M3 rod
+        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(26.0, ry - 2.825, floor_t + 0.4)))
+        joiner_cuts.append(Part.makeBox(14.0, 8.5, rib_h, App.Vector(ext_w - 42.0, ry - 4.25, floor_t + 0.4)))
+        joiner_cuts.append(Part.makeBox(2.8, 5.65, rib_h, App.Vector(ext_w - 25.0, ry - 2.825, floor_t + 0.4)))
+
+    # 2) 2 Main Transverse Y-Ribs at X = 105.0 and X = 310.0 (7.5mm tall, 10.0mm wide; M3 bore at Z = 9.0mm)
+    for rx in (105.0, 310.0):
+        adds.append(Part.makeBox(rib_w, ext_d - 2*wall_t, rib_h, App.Vector(rx - rib_w/2.0, wall_t, floor_t)))
+        # Widened Joiner Boss across mid_y (14mm wide x 64mm long)
+        adds.append(Part.makeBox(14.0, 64.0, rib_h, App.Vector(rx - 7.0, mid_y - 24.0, floor_t)))
+        # Full-length internal M3 tunnel (D=3.4mm) from Y=16 to Y=ext_d-16 (blind to exterior!)
+        joiner_cuts.append(Part.makeCylinder(1.7, ext_d - 32.0, App.Vector(rx, 16.0, z_bore_y), App.Vector(0, 1, 0)))
+        # Central seam Captive M3 Hex Nut Slot on Front side (mid_y - 8.5)
+        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, mid_y - 8.5, floor_t + 3.0)))
+        # Central seam Allen Screw Access Trough on Rear side (mid_y + 8.0 .. mid_y + 34.0)
+        joiner_cuts.append(Part.makeBox(8.5, 26.0, rib_h, App.Vector(rx - 4.25, mid_y + 8.0, floor_t + 3.0)))
+        # End-of-rib Captive Nut Slots near Front/Rear walls for optional full-length 250mm M3 rod
+        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, 26.0, floor_t + 3.0)))
+        joiner_cuts.append(Part.makeBox(8.5, 14.0, rib_h, App.Vector(rx - 4.25, ext_d - 42.0, floor_t + 3.0)))
+        joiner_cuts.append(Part.makeBox(5.65, 2.8, rib_h, App.Vector(rx - 2.825, ext_d - 25.0, floor_t + 3.0)))
+
+    # 3) Perimeter Wall Upper Internal Joiner Lugs (clamping the 4 outer walls at mid_x and mid_y)
+    # Front wall (Y = wall_t) at X = mid_x
+    adds.append(Part.makeBox(56.0, 8.0, 7.5, App.Vector(mid_x - 20.0, wall_t, floor_t)))
+    joiner_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(mid_x - 16.0, wall_t + 4.0, floor_t + 3.8), App.Vector(1, 0, 0)))
+    joiner_cuts.append(Part.makeBox(2.8, 5.65, 7.5, App.Vector(mid_x - 8.5, wall_t + 1.2, floor_t + 0.6)))
+    joiner_cuts.append(Part.makeBox(22.0, 6.5, 7.5, App.Vector(mid_x + 8.0, wall_t + 1.0, floor_t + 0.6)))
+
+    # Left & Right walls (X = wall_t and X = ext_w - wall_t - 8.0) at Y = mid_y (Z = 14.0..24.0 above motherboard)
+    for wx in (wall_t, ext_w - wall_t - 8.0):
+        adds.append(Part.makeBox(8.0, 56.0, 9.0, App.Vector(wx, mid_y - 20.0, 15.0)))
+        joiner_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(wx + 4.0, mid_y - 16.0, 19.5), App.Vector(0, 1, 0)))
+        joiner_cuts.append(Part.makeBox(5.65, 2.8, 7.0, App.Vector(wx + 1.2, mid_y - 8.5, 17.5)))
+        joiner_cuts.append(Part.makeBox(6.5, 22.0, 7.0, App.Vector(wx + 0.8, mid_y + 8.0, 17.5)))
 
     # 11 M3 Motherboard Standoffs + 7 Coaxial Upper Anti-Flex Keyboard Support Columns
     for x_pcb, y_pcb, is_kb in mh_coords:
@@ -161,10 +207,11 @@ def build_bottom_case():
 
     for a in adds:
         tray = tray.fuse(a)
+    tray = tray.cut(Part.makeCompound(joiner_cuts))
     return tray
 
 # ============================================================================
-# BUILD PART 2: SLOPED TOP COVER WITH ANTI-FLEX KEYBOARD RIBS
+# BUILD PART 2: SLOPED TOP COVER WITH ANTI-FLEX KEYBOARD RIBS & CAPTIVE-NUT JOINERS
 # ============================================================================
 def make_wedge(w, d, h_front, h_rear, y_flat_rear=140.0):
     pts = [
@@ -213,6 +260,25 @@ def build_top_cover():
         rib_y = Part.makeBox(kb_w, 2.2, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.1, 0))
         cover = cover.fuse(rib_y)
 
+    # Internal Captive-Nut Joiner Flanges under Top Cover (for joining Top_Q1..Q4 from underneath)
+    top_adds = []
+    top_cuts = []
+    # Rear flat section X-joiner at Y = 220.0 across mid_x
+    top_adds.append(Part.makeBox(60.0, 12.0, 9.0, App.Vector(mid_x - 22.0, 220.0 - 6.0, upper_rear_h - 12.0)))
+    top_cuts.append(Part.makeCylinder(1.7, 52.0, App.Vector(mid_x - 18.0, 220.0, upper_rear_h - 7.5), App.Vector(1, 0, 0)))
+    top_cuts.append(Part.makeBox(2.8, 5.65, 7.0, App.Vector(mid_x - 8.5, 220.0 - 2.825, upper_rear_h - 12.5)))
+    top_cuts.append(Part.makeBox(22.0, 8.0, 7.0, App.Vector(mid_x + 8.0, 220.0 - 4.0, upper_rear_h - 12.5)))
+
+    # Left & Right side wall Y-joiners at Y = mid_y
+    for wx in (wall_t, ext_w - wall_t - 8.0):
+        top_adds.append(Part.makeBox(8.0, 56.0, 9.0, App.Vector(wx, mid_y - 20.0, 2.0)))
+        top_cuts.append(Part.makeCylinder(1.7, 48.0, App.Vector(wx + 4.0, mid_y - 16.0, 6.5), App.Vector(0, 1, 0)))
+        top_cuts.append(Part.makeBox(5.65, 2.8, 7.0, App.Vector(wx + 1.2, mid_y - 8.5, 1.5)))
+        top_cuts.append(Part.makeBox(6.5, 22.0, 7.0, App.Vector(wx + 0.8, mid_y + 8.0, 1.5)))
+
+    for ta in top_adds:
+        cover = cover.fuse(ta)
+    cover = cover.cut(Part.makeCompound(top_cuts))
     return cover
 
 # ============================================================================
@@ -225,9 +291,7 @@ def build_switch_plate():
     for x_kb, y_kb, wu in staggered_switches:
         cx = x_kb
         cy = kb_d - y_kb
-        # Central 14.0 x 14.0 mm Cherry MX switch cutout
         holes.append(Part.makeBox(sw_cut, sw_cut, plate_t + 2.0, App.Vector(cx - sw_cut/2.0, cy - sw_cut/2.0, -1.0)))
-        # For the 6.25U Spacebar (wu == 6.25), add left & right Cherry MX stabilizer cutouts at +-50.0mm
         if wu >= 6.0:
             for sx_off in (-50.0, 50.0):
                 holes.append(Part.makeBox(6.8, 13.8, plate_t + 2.0, App.Vector(cx + sx_off - 3.4, cy - 6.9, -1.0)))
@@ -238,23 +302,51 @@ def build_switch_plate():
     plate = plate.cut(Part.makeCompound(holes))
     return plate
 
+# ============================================================================
+# HELPER: SPLIT SHAPE INTO 4 INTERLOCKING QUADRANTS WITH MALE/FEMALE ALIGNMENT PINS
+# ============================================================================
+def split_into_interlocking_quadrants(shape, z_pin):
+    q1_box = Part.makeBox(mid_x, mid_y, 100.0, App.Vector(0, 0, -5.0))
+    q2_box = Part.makeBox(mid_x + 5.0, mid_y, 100.0, App.Vector(mid_x, 0, -5.0))
+    q3_box = Part.makeBox(mid_x, mid_y + 5.0, 100.0, App.Vector(0, mid_y, -5.0))
+    q4_box = Part.makeBox(mid_x + 5.0, mid_y + 5.0, 100.0, App.Vector(mid_x, mid_y, -5.0))
+
+    q1 = shape.common(q1_box)
+    q2 = shape.common(q2_box)
+    q3 = shape.common(q3_box)
+    q4 = shape.common(q4_box)
+
+    # Add self-aligning conical/cylindrical shear pins across mid_x and mid_y (with 0.2mm FDM tolerance)
+    for py_pin in (45.0, 110.0):
+        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(mid_x, py_pin, z_pin), App.Vector(1, 0, 0))
+        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(mid_x - 0.1, py_pin, z_pin), App.Vector(1, 0, 0))
+        q1 = q1.fuse(pin_m)
+        q2 = q2.cut(pin_f)
+    for py_pin in (185.0, 255.0):
+        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(mid_x, py_pin, z_pin), App.Vector(1, 0, 0))
+        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(mid_x - 0.1, py_pin, z_pin), App.Vector(1, 0, 0))
+        q3 = q3.fuse(pin_m)
+        q4 = q4.cut(pin_f)
+    for px_pin in (65.0, 155.0):
+        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(px_pin, mid_y, z_pin), App.Vector(0, 1, 0))
+        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(px_pin, mid_y - 0.1, z_pin), App.Vector(0, 1, 0))
+        q1 = q1.fuse(pin_m)
+        q3 = q3.cut(pin_f)
+    for px_pin in (260.0, 350.0):
+        pin_m = Part.makeCone(2.2, 1.8, 4.0, App.Vector(px_pin, mid_y, z_pin), App.Vector(0, 1, 0))
+        pin_f = Part.makeCone(2.4, 2.0, 4.3, App.Vector(px_pin, mid_y - 0.1, z_pin), App.Vector(0, 1, 0))
+        q2 = q2.fuse(pin_m)
+        q4 = q4.cut(pin_f)
+
+    return q1, q2, q3, q4
+
 print("Building Bottom Case, Top Cover, and 1.5mm Staggered Switch Plate B-Rep solids...")
 bottom_shape = build_bottom_case()
 top_shape    = build_top_cover()
 plate_shape  = build_switch_plate()
 
-# Create Quadrant Splits for 256x256mm 3D Printers
-mid_x = ext_w / 2.0
-mid_y = ext_d / 2.0
-q1_box = Part.makeBox(mid_x, mid_y, 100.0, App.Vector(0, 0, -5.0))
-q2_box = Part.makeBox(mid_x + 5.0, mid_y, 100.0, App.Vector(mid_x, 0, -5.0))
-q3_box = Part.makeBox(mid_x, mid_y + 5.0, 100.0, App.Vector(0, mid_y, -5.0))
-q4_box = Part.makeBox(mid_x + 5.0, mid_y + 5.0, 100.0, App.Vector(mid_x, mid_y, -5.0))
-
-bottom_q1 = bottom_shape.common(q1_box)
-bottom_q2 = bottom_shape.common(q2_box)
-bottom_q3 = bottom_shape.common(q3_box)
-bottom_q4 = bottom_shape.common(q4_box)
+bottom_q1, bottom_q2, bottom_q3, bottom_q4 = split_into_interlocking_quadrants(bottom_shape, 1.75)
+top_q1, top_q2, top_q3, top_q4             = split_into_interlocking_quadrants(top_shape, 5.0)
 
 # ============================================================================
 # SAVE MAIN ASSEMBLY DOCUMENT: case/Aleste520_Case.FCStd
@@ -277,7 +369,7 @@ top_placed = top_shape.copy()
 top_placed.translate(App.Vector(0, 0, lower_h))
 obj_top.Shape = top_placed
 
-# Add printable quadrants group
+# Add printable quadrants group (both Bottom and Top Cover!)
 grp = doc.addObject("App::DocumentObjectGroup", "Printable_Quadrants_256x256")
 grp.Label = "04_Printable_Quadrants_256x256mm"
 for qname, qlabel, qshape in [
@@ -285,6 +377,10 @@ for qname, qlabel, qshape in [
     ("Bottom_Q2_FrontRight", "Bottom_Q2_FrontRight", bottom_q2),
     ("Bottom_Q3_RearLeft",   "Bottom_Q3_RearLeft",   bottom_q3),
     ("Bottom_Q4_RearRight",  "Bottom_Q4_RearRight",  bottom_q4),
+    ("Top_Q1_FrontLeft",     "Top_Q1_FrontLeft",     top_q1),
+    ("Top_Q2_FrontRight",    "Top_Q2_FrontRight",    top_q2),
+    ("Top_Q3_RearLeft",      "Top_Q3_RearLeft",      top_q3),
+    ("Top_Q4_RearRight",     "Top_Q4_RearRight",     top_q4),
 ]:
     qo = doc.addObject("Part::Feature", qname)
     qo.Label = qlabel
