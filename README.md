@@ -40,3 +40,13 @@ Complete Western reproduction of the **1993 Soviet Aleste 520EX** Z80 computer (
 * `Aleste520v4.kicad_pcb` — Fully routed 2-layer PCB (`286 × 220 mm`)
 * `Aleste520v2.kicad_sym` / `Aleste520v3-rescue.kicad_sym` / `Aleste520v4.pretty/` — Project symbol and footprint libraries
 * `Componenti_Aleste520v4.csv` / `Componenti_Aleste520v4_comma.csv` — Complete Bill of Materials (BOM) with component type, designator (`U1..U89`, `C1..C128`, `R1..R109`, etc.), and part number/value.
+* `rom/` — Original binary ROM/PROM images (100% bit-compatible with this board):
+
+| File | Size | Target Socket | Western IC | Original Soviet IC | Function |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `rom/AL512.BIN` | 64 KB (65,536 B) | **`U31`** | `27C512` (DIP-28) | `К573РФ4` (`K573RF4`) | System BIOS, BASIC, Boot & AMSDOS |
+| `rom/RFCOLDAT.BIN` | 2 KB (2,048 B) | **`U62`** | `2716` / `27C16` (DIP-24) | `К573РФ2` (`K573RF2`) | Color Palette Lookup (`XD0..XD5`, `VRAMACC`) |
+| `rom/RFVDKEY.BIN` | 2 KB (2,048 B) | **`U65`** | `2716` / `27C16` (DIP-24) | `К573РФ2` (`K573RF2`) | Video Sync (`SYNC*`, `HY*`, `SINT*`) & Keyboard Scan (`KK0..KK3`) |
+| `rom/MAPPER.BIN` | 256 B (256×4) | **`U28`** | `AM27S20` / `82S129` (DIP-16) | `КР556РТ4` (`KR556RT4`) | Memory Bank Address Mapper (`MAP14..MAP17`) |
+| `rom/ROMRAM.BIN` | 256 B (256×4) | **`U67`** | `AM27S20` / `82S129` (DIP-16) | `КР556РТ4` (`KR556RT4`) | Bus & Memory Enable Decoder (`/ROMEN`, `/RAMEN`, `BUFFER0..1`) |
+| `rom/AF.BIN` | 32 B (32×8) | **`U69`** | `SN74188` / `82S23` (DIP-16) | `К155РЕ3` (`K155RE3`) | Floppy Disk Controller State / Precompensation PROM |
