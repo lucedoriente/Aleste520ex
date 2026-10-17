@@ -1,4 +1,4 @@
-﻿Tipo Componente,Numero (Designatore),Codice / Valore Componente,Footprint THT
+Tipo Componente,Numero (Designatore),Codice / Valore Componente,Footprint THT
 Circuito Integrato (IC),U1,HM50256P-20,DIP-16_W7.62mm_Socket
 Circuito Integrato (IC),U2,HM50256P-20,DIP-16_W7.62mm_Socket
 Circuito Integrato (IC),U3,HM50256P-20,DIP-16_W7.62mm_Socket
@@ -93,9 +93,9 @@ Condensatore Ceramico,C3,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C4,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C5,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Elettrolitico,C6,1nF,CP_Radial_D5.0mm_P2.50mm
-Condensatore Ceramico,C7,"0,33uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C7,0,33uF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C8,1F,C_Disc_D5.0mm_W2.5mm_P2.50mm
-Condensatore Ceramico,C9,"1,5uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C9,1,5uF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Elettrolitico,C10,100v,CP_Radial_D5.0mm_P2.50mm
 Condensatore Ceramico,C11,12,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C12,24,C_Disc_D5.0mm_W2.5mm_P2.50mm
@@ -107,7 +107,7 @@ Condensatore Ceramico,C17,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C18,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Ceramico,C20,1000uF,C_Radial_D10.0mm_H16.0mm_P5.00mm
 Condensatore Elettrolitico,C22,100uF,CP_Radial_D5.0mm_P2.50mm
-Condensatore Ceramico,C23,"0,47uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C23,0,47uF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore Elettrolitico,C24,1uF,CP_Radial_D5.0mm_P2.50mm
 Condensatore Elettrolitico,C25,47uF,CP_Radial_D5.0mm_P2.50mm
 Condensatore Elettrolitico,C26,47uF,CP_Radial_D5.0mm_P2.50mm
@@ -196,27 +196,27 @@ Condensatore di Decoupling Ceramico,C282,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore di Decoupling Ceramico,C283,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore di Decoupling Ceramico,C284,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
 Condensatore di Decoupling Ceramico,C285,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
-Condensatore Ceramico,CB1,"0,1uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
-Resistore,R1,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R2,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R3,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R4,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R5,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R6,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Condensatore Ceramico,CB1,0,1uF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Resistore,R1,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R2,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R3,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R4,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R5,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R6,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R7,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R8,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R9,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R14,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R15,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R14,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R15,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R16,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R24,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R25,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R25,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R26,10k,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R27,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R33,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R34,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R35,390K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R36,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R36,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R37,10М,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R38,470K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R39,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
@@ -227,7 +227,7 @@ Resistore,R43,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R44,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R45,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R46,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R51,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R51,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R52,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R53,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R54,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
@@ -235,30 +235,30 @@ Resistore,R55,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R56,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R57,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R58,510,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R59,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R60,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R61,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R59,6,8K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R60,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R61,3,3K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R62,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R63,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R64,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R65,120,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R66,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R76,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R76,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R77,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R78,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R79,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R80,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R81,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R82,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R83,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R84,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R85,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R86,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R87,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R100,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R82,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R83,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R84,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R85,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R86,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R87,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R100,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R101,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R102,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R105,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R105,1,2K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R114,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R115,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R116,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
@@ -268,26 +268,26 @@ Resistore,R119,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R120,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R121,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R122,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R123,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R126,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R127,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R128,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R123,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R126,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R127,6,8K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R128,3,3K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R129,510,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R130,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R131,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R132,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
-Resistore,R133,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R131,6,8K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R132,2,7K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R133,3,3K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R134,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R135,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Resistore,R136,RES,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
 Rete Resistiva (SIP),RN1,10K,R_Array_SIP9
 Rete Resistiva (SIP),RN2,10K,R_Array_SIP9
-Rete Resistiva (SIP),RN3,"1,2K",R_Array_SIP6
-Rete Resistiva (SIP),RN4,"2,7K",R_Array_SIP5
+Rete Resistiva (SIP),RN3,1,2K,R_Array_SIP6
+Rete Resistiva (SIP),RN4,2,7K,R_Array_SIP5
 Rete Resistiva (SIP),RN5,10K,R_Array_SIP5
-Rete Resistiva (SIP),RN6,"1,2K",R_Array_SIP5
-Rete Resistiva (SIP),RN7,"1,2K",R_Array_SIP5
-Rete Resistiva (SIP),RN8,"1,2K",R_Array_SIP6
+Rete Resistiva (SIP),RN6,1,2K,R_Array_SIP5
+Rete Resistiva (SIP),RN7,1,2K,R_Array_SIP5
+Rete Resistiva (SIP),RN8,1,2K,R_Array_SIP6
 Rete Resistiva (SIP),RN9,10K,R_Array_SIP4
 Diodo,VD1,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
 Diodo,VD2,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
@@ -323,13 +323,15 @@ Connettore,X5.A1,CONN-7S,CUI_SDS-70J
 Connettore,X5.B1,CONN-7S,CUI_SDS-70J
 Connettore,X6,CONN-7S,DNR-8F1R
 Connettore,X7,CONN-7S,DNR-8F1R
-Connettore,X8,CONN-12,PinHeader_1x12_P1.27mm_Vertical
-Connettore,X9,CONN-12,PinHeader_1x12_P1.27mm_Vertical
-Foro di Fissaggio / Piazzola,P1,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P2,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P3,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P4,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P5,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P6,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P7,PIN,MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola,P8,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Connettore Tastiera (Colonne),X8,CONN-12 (2x06 2.54mm),PinHeader_2x06_P2.54mm_Vertical
+Connettore Tastiera (Righe+Reset),X9,CONN-12 (2x06 2.54mm),PinHeader_2x06_P2.54mm_Vertical
+Piazzola Alimentazione (PicoPSU),P1,+5V_VCC,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU),P2,GND_PWR,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU),P3,+12V_EXP,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU),P4,GND_EXP,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU),P5,+5V_AUX,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU),P6,GND_AUX,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Batteria RTC,P7,BAT+_3V,MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Batteria RTC,P8,BAT-_GND,MountingHole_2.2mm_M2_DIN965_Pad
+Foro Fissaggio Meccanico M3,MH1..MH11,M3_3.2mm_GND,MountingHole_3.2mm_M3_Pad
+

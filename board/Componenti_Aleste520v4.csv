@@ -1,4 +1,4 @@
-﻿Tipo Componente;Numero (Designatore);Codice / Valore Componente;Footprint THT
+Tipo Componente;Numero (Designatore);Codice / Valore Componente;Footprint THT
 Circuito Integrato (IC);U1;HM50256P-20;DIP-16_W7.62mm_Socket
 Circuito Integrato (IC);U2;HM50256P-20;DIP-16_W7.62mm_Socket
 Circuito Integrato (IC);U3;HM50256P-20;DIP-16_W7.62mm_Socket
@@ -323,13 +323,15 @@ Connettore;X5.A1;CONN-7S;CUI_SDS-70J
 Connettore;X5.B1;CONN-7S;CUI_SDS-70J
 Connettore;X6;CONN-7S;DNR-8F1R
 Connettore;X7;CONN-7S;DNR-8F1R
-Connettore;X8;CONN-12;PinHeader_1x12_P1.27mm_Vertical
-Connettore;X9;CONN-12;PinHeader_1x12_P1.27mm_Vertical
-Foro di Fissaggio / Piazzola;P1;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P2;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P3;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P4;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P5;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P6;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P7;PIN;MountingHole_2.2mm_M2_DIN965_Pad
-Foro di Fissaggio / Piazzola;P8;PIN;MountingHole_2.2mm_M2_DIN965_Pad
+Connettore Tastiera (Colonne);X8;CONN-12 (2x06 2.54mm);PinHeader_2x06_P2.54mm_Vertical
+Connettore Tastiera (Righe+Reset);X9;CONN-12 (2x06 2.54mm);PinHeader_2x06_P2.54mm_Vertical
+Piazzola Alimentazione (PicoPSU);P1;+5V_VCC;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU);P2;GND_PWR;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU);P3;+12V_EXP;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU);P4;GND_EXP;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU);P5;+5V_AUX;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Alimentazione (PicoPSU);P6;GND_AUX;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Batteria RTC;P7;BAT+_3V;MountingHole_2.2mm_M2_DIN965_Pad
+Piazzola Batteria RTC;P8;BAT-_GND;MountingHole_2.2mm_M2_DIN965_Pad
+Foro Fissaggio Meccanico M3;MH1..MH11;M3_3.2mm_GND;MountingHole_3.2mm_M3_Pad
+

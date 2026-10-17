@@ -1,133 +1,114 @@
-# Aleste 520EX — Edizione Occidentale Through-Hole (THT) (KiCad 9.0)
+# Aleste 520EX — Edizione Completa Western Through-Hole (THT) (KiCad 9.0)
 
 🌐 **Lingua / Language**: [**🇬🇧 Read in English (`README.md`)**](README.md) | **🇮🇹 Italiano**
 
 ---
 
-Riproduzione occidentale completa del personal computer sovietico **Aleste 520EX (1993)** basato su Z80 (architettura ibrida compatibile Amstrad CPC 6128 e MSX2 progettata da Patisonic a Omsk, Russia), interamente riprogettata in **KiCad 9.0** utilizzando **componenti 100% occidentali Through-Hole (THT)** e un PCB a 2 layer completamente sbrogliato.
+Riproduzione hardware completa del personal computer sovietico **Aleste 520EX del 1993** basato su CPU Z80 (architettura ibrida compatibile Amstrad CPC 6128 e MSX2 progettata da Patisonic a Omsk, Russia), interamente riprogettata in **KiCad 9.0** utilizzando **al 100% componenti occidentali Through-Hole (THT)**, corredata della sua **Tastiera Meccanica Cherry MX dedicata (`keyboard/`)** e del **Case Parametrico Anti-Flessione (`case/`)**.
 
-![Vista Superiore PCB](pcb_top.png)
-
----
-
-## 1. Caratteristiche Principali di Questa Release
-
-* **Conversione 100% Integrati Occidentali (`U1..U89`)**:
-  * Tutti gli integrati logici, di memoria e periferiche sovietici sono stati convertiti nei corrispondenti standard occidentali (`74LSxx`, `74HCxx`, `Z80CPU`, `8255`, `8253`, `8251A`, `8272`, `MC6845`, `AY-3-8910`, `MC146818P`, `HM50256P-20` / `41256`).
-  * **Risoluzione definitiva `KR1802IR1` (`КР1802ИР1`)**: Sostituiti i rari register file sovietici dual-port 16×4 a 24 pin (`U60`, `U61`, `U82`, `U83`) con gli equivalenti occidentali **AMD `AM29705` (DIP-28)**, cablando correttamente il doppio bus indirizzi (`A0..A3`, `B0..B3`), gli strobe di scrittura (`~WE1`, `~WE2`), i latch d'uscita in modalità trasparente non invertente (`~A-LO = GND`, `LE = VCC`) e le uscite open-collector (`~OE-A`) sia per la palette colori (`U60`+`U61`) sia per la scansione tastiera/mapper (`U82`+`U83`).
-  * Uniformati tutti i designatori degli integrati dalla nomenclatura russa `D1..D89` allo standard occidentale `U1..U89`.
-* **Montaggio 100% Through-Hole (THT)**:
-  * Tutti i componenti (zocoli DIP `U1..U89`, resistenze, condensatori ceramici/elettrolitici, diodi, transistor, quarzi, trimmer, connettori) adottano footprint THT standard per una saldatura manuale agevole e una manutenzione immediata.
-  * Sulla serigrafia superiore (`F.Silkscreen`) sono stampati sia i designatori (`U1..U89`) sia il codice integrato (`Value`, es. `74LS174`, `AM29705`, `Z80CPU`) centrati all'interno di ogni zoccolo DIP.
-* **PCB 2-Layer Completamente Sbrogliato (`400,9 × 280,5 mm`)**:
-  * **0 Errori ERC** sullo schema elettrico gerarchico (`Aleste520v4.kicad_sch` + 6 sottoschemi).
-  * **0 Violazioni DRC e 0 Pin Non Connessi** sul PCB (`Aleste520v4.kicad_pcb`).
-  * **Integrità del Segnale e Distribuzione Alimentazione**:
-    * Netclass dedicate per `Power` (`0.40 mm`), segnali `Critical` ad alta frequenza / clock / strobe / video RGB e audio analogico (`0.25 mm` con isolamento anti-crosstalk maggiorato a `0.28 mm`) e `Default` (`0.25 mm`, clearance `0.20 mm`).
-    * Piani di massa `GND` su `F.Cu` e `B.Cu` dotati di **Thermal Relief** (raggi da `0.35 mm`, gap `0.25 mm`) per facilitare la saldatura a mano, cuciti tra loro con oltre **3.670 via di stitching GND** (`0.6 mm / 0.3 mm`).
-    * 95 condensatori di disaccoppiamento locali da `100 nF` (`C32..C128`) posizionati a ridosso del pin `VCC` di ciascun integrato.
-
-![Vista Inferiore PCB](pcb_bottom.png)
+![Vista Superiore Scheda Madre](board/pcb_top.png)
 
 ---
 
-## 2. Struttura del Progetto
+## 1. Struttura del Repository
 
-* `Aleste520v4.kicad_pro` — File di progetto KiCad 9.0
-* `Aleste520v4.kicad_sch` — Schema principale + fogli gerarchici:
-  * `cpu.kicad_sch` — CPU Z80, ROM di sistema (`U31`), PROM Mapper (`U28`), RAM tastiera/mapper (`U82`, `U83` `AM29705`), logica di wait/reset
-  * `ram.kicad_sch` — 512 KB DRAM (`U1..U16`, `HM50256P-20` / `41256`), multiplexer indirizzi e 95 condensatori di decoupling (`C32..C128`)
-  * `clkcrtc.kicad_sch` — Generatore di clock principale, CRTC (`MC6845`), EPROM sincronismi video/tastiera (`U65`), PROM decodifica bus (`U67`)
-  * `gatearray.kicad_sch` — Shift register video, EPROM lookup colori (`U62`) e RAM Palette Colori (`U60`, `U61` `AM29705`)
-  * `periph.kicad_sch` — PPI (`8255`), PIT (`8253`), USART (`8251A`), PSG (`AY-3-8910`), RTC (`MC146818P`), audio e porte I/O
-  * `fdc.kicad_sch` — Floppy Disk Controller (`8272` / `uPD765`), separatore dati e PROM macchina a stati (`U69`)
-* `Aleste520v4.kicad_pcb` — PCB a 2 layer completamente sbrogliato (`400,9 × 280,5 mm`)
-* `Aleste520v2.kicad_sym` / `Aleste520v3-rescue.kicad_sym` / `Aleste520v4.pretty/` — Librerie simboli e footprint del progetto
-* `Componenti_Aleste520v4.csv` (separatore `;` per Excel IT) / `Componenti_Aleste520v4_comma.csv` (separatore `,`) — Distinta componenti completa (BOM) con tipo componente, designatore (`U1..U89`, `C1..C128`, `R1..R109`, ecc.), codice componente e footprint THT.
-* `rom/` — Immagini binarie originali delle ROM/PROM (compatibili al 100% bit-per-bit con questa scheda).
+Il progetto è suddiviso in quattro directory modulari:
+
+| Directory | Contenuto Principale | Descrizione |
+| :--- | :--- | :--- |
+| **[`board/`](board/)** | `Aleste520v4.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Aleste520v4.csv` | **Scheda Madre (`400.9 × 280.5 mm`)**: 100% IC occidentali THT (`U1..U89`), connettori tastiera standard `2x06` passo `2.54 mm` (`X8`, `X9`), 11 fori di fissaggio `M3` (`MH1..MH11`), piazzole alimentazione/batteria RTC etichettate (`P1..P8`), **0 errori ERC / 0 violazioni DRC**. |
+| **[`keyboard/`](keyboard/)** | `Aleste520_Keyboard.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Tastiera_Aleste520.csv`, [`README.md`](keyboard/README.md) | **Tastiera Meccanica (`358.0 × 122.0 mm`)**: 82 switch Cherry MX (`SW1..SW81` matrice + `SW82` Reset Hardware), 81 diodi `1N4148` anti-ghosting (Full NKRO), connettori IDC `2x06` passo `2.54 mm` (`J1`, `J2`), 10 fori `M3` anti-flessione (`MH1..MH10`), **0 errori ERC / 0 violazioni DRC**. |
+| **[`case/`](case/)** | `Aleste520_Case.scad`, `keyboard_plate.dxf`, [`README.md`](case/README.md) | **Case Desktop Custom (`416.0 × 296.0 × 62.0 mm`)**: Modello 3D parametrico OpenSCAD (Base Inferiore, Scocca Superiore inclinata, Piastra Switch `1.5 mm` e modalità suddivisa in 4 quadranti per stampanti 3D $256\times 256\text{ mm}$) + file `keyboard_plate.dxf` pronto per taglio laser con **Sistema di Supporto Tastiera Anti-Flessione a 3 Stadi**. |
+| **[`rom/`](rom/)** | `AL512.BIN`, `RFCOLDAT.BIN`, `RFVDKEY.BIN`, `MAPPER.BIN`, `ROMRAM.BIN`, `AF.BIN` | **Immagini Firmware Originali**: 100% compatibili bit-per-bit con questa scheda occidentale (interfaccia di boot/setup nativa in inglese, supporto set caratteri Latino/ASCII e Cirillico). |
 
 ---
 
-## 3. Guida alla Programmazione delle EPROM e PROM Bipolari
+## 2. Caratteristiche della Scheda Madre (`board/`)
 
-Tutti i 6 file binari originali presenti nella cartella `rom/` sono **compatibili al 100% così come sono**: non è stato effettuato alcuno scambio di pin indirizzo/dati durante lo sbroglio e gli `AM29705` (`U60`, `U61`, `U82`, `U83`) lavorano in modalità trasparente non invertente esattamente come i `KR1802IR1` originali.
+* **Conversione al 100% a Integrati Occidentali (`U1..U89`)**:
+  * Tutti i circuiti integrati logici, di memoria e le periferiche sovietiche sono stati convertiti nei rispettivi equivalenti occidentali standard (`74LSxx`, `74HCxx`, `Z80CPU`, `8255`, `8253`, `8251A`, `8272`, `MC6845`, `AY-3-8910`, `MC146818P`, `HM50256P-20` / `41256`).
+  * **Soluzione definitiva per `KR1802IR1` (`КР1802ИР1`)**: I rari register file sovietici dual-port 16×4 a 24 pin in `U60`, `U61`, `U82` e `U83` sono stati sostituiti con il componente occidentale **AMD `AM29705` (DIP-28)**, cablando correttamente i doppi bus indirizzi (`A0..A3`, `B0..B3`), gli strobe di scrittura (`~WE1`, `~WE2`), i latch di uscita trasparenti (`~A-LO = GND`, `LE = VCC`) e le uscite open-collector (`~OE-A`) sia per la palette colori (`U60`+`U61`) sia per il sottosistema tastiera/mapper (`U82`+`U83`).
+  * Tutti i designatori degli integrati sono stati standardizzati da `D1..D89` a `U1..U89`.
+* **Connettori Tastiera Aggiornati a Passo Standard $2.54\text{ mm}$ (`X8` e `X9`)**:
+  * Sostituiti i vecchi connettori fuori standard a passo $1.27\text{ mm}$ su `X8` e `X9` con **Header/IDC Box Header standard a doppia fila `2x06` passo $2.54\text{ mm}$ ($0.1''$)** (`Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical`), compatibili con comuni cavi piatti IDC a 12 poli o cablaggi DuPont.
+* **11 Fori di Fissaggio Meccanico `M3` (`MH1..MH11`)**:
+  * Aggiunti 11 fori `M3` metallizzati ($\varnothing\ 3.2\text{ mm}$ foro, $\varnothing\ 6.0\text{ mm}$ piazzola connessa al piano `GND`) lungo il perimetro, al centro e nella zona anteriore sotto la tastiera per il fissaggio alle colonnine del case e ai pilastri coassiali anti-flessione della tastiera.
+* **PCB a 2 Layer Completamente Sbrogliato (`400.9 × 280.5 mm`)**:
+  * **0 Errori ERC** sullo schema elettrico gerarchico (`board/Aleste520v4.kicad_sch` + 6 sottoschemi).
+  * **0 Violazioni DRC e 0 Connessioni Mancanti** sul PCB (`board/Aleste520v4.kicad_pcb`).
+  * Piani di massa `GND` completi su `F.Cu` e `B.Cu` con **Thermal Relief** (`0.35 mm` razze, `0.25 mm` isolamento) per agevolare la saldatura manuale, oltre **3.670 via di cucitura (`stitching vias`)** e 95 condensatori di disaccoppiamento locali da `100 nF` (`C32..C128`).
 
-### 3.1 Tabella di Corrispondenza Firmware
+![Vista Inferiore Scheda Madre](board/pcb_bottom.png)
 
-| File Binario | Dimensione | Zocolo PCB | Integrato Occidentale | Equivalenti Compatibili | Originale Sovietico | Funzione |
+---
+
+## 3. Guida all'Alimentazione: PicoPSU + Collegamento alla Rete $220\text{ V AC}$
+
+La scheda madre dell'Aleste 520EX richiede principalmente **`+5V DC`** (piano `VCC`, con un assorbimento di $\approx 2.2\text{ A} \dots 2.8\text{ A}$ per gli 89 IC TTL/CMOS/NMOS) più **`+12V DC`** (utilizzati dallo slot di espansione `X1` e dal connettore video `X5.B1`), oltre a una **batteria tampone a bottone da `3V` (`CR2032`)** per il Real-Time Clock `MC146818P` (`U19`).
+
+### 3.1 Collegamento Sicuro alla Rete $220\text{ V AC}$
+Per garantire la massima sicurezza elettrica ed evitare di portare la tensione di rete a $220\text{ V AC}$ all'interno del case stampato in 3D:
+1. **Alimentatore Esterno AC/DC ($220\text{ V AC} \rightarrow 12\text{ V DC}$)**: Utilizzare un alimentatore switching esterno certificato (tipo "brick" da notebook/monitor) da **`12V DC / 5A (60W)`** con spinotto cilindrico standard `5.5 × 2.5 mm`.
+2. **PicoPSU DC-DC Interno (`PicoPSU-80` / `PicoPSU-120` o convertitore Buck `12V->5V 5A`)**:
+   * Installare la presa DC da pannello `5.5 × 2.5 mm` e l'interruttore a bilanciere posteriore negli appositi scassi predisposti sul pannello posteriore del case ([`case/Aleste520_Case.scad`](case/Aleste520_Case.scad)).
+   * Collegare il filo **Verde (`PS_ON#`, Pin 16 del connettore ATX 24-pin)** della PicoPSU a **Massa (`GND`, filo Nero, Pin 15/17)** tramite l'interruttore posteriore per comandare l'accensione della PicoPSU.
+   * Portare i `+5V` (filo Rosso) e i `+12V` (filo Giallo) della PicoPSU alle piazzole `P1..P6` della scheda madre secondo la tabella seguente.
+
+### 3.2 Mappa delle Piazzole Alimentazione e Batteria RTC (`P1..P8`)
+
+| Piazzola | Etichetta Serigrafica | Net | Coordinate PCB `(X, Y)` | Collegamento |
+| :--- | :--- | :--- | :--- | :--- |
+| **`P1`** | `+5V_VCC` | `VCC` (`+5V`) | `(321.31, 240.03)` | **PicoPSU `+5V` (Filo Rosso, sez. $\ge 0.75\text{ mm}^2$)** — Alimentazione logica principale |
+| **`P2`** | `GND_PWR` | `GND` | `(311.15, 250.19)` | **PicoPSU `GND` (Filo Nero, sez. $\ge 0.75\text{ mm}^2$)** — Ritorno di massa principale |
+| **`P3`** | `+12V_EXP` | `+12V` | `(303.53, 250.19)` | **PicoPSU `+12V` (Filo Giallo)** — Slot di espansione `X1` e connettore `X5.B1` |
+| **`P4`** | `GND_EXP` | `GND` | `(295.91, 250.19)` | **PicoPSU `GND` (Filo Nero)** — Ritorno di massa ausiliario |
+| **`P5`** | `+5V_AUX` | `VCC` (`+5V`) | `(292.10, 260.35)` | **PicoPSU `+5V` (Filo Rosso)** — Ramo `+5V` in parallelo a `P1` (riduce la caduta di tensione) |
+| **`P6`** | `GND_AUX` | `GND` | `(306.07, 265.43)` | **PicoPSU `GND` (Filo Nero)** — Ramo `GND` in parallelo a `P2` |
+| **`P7`** | `BAT+_3V` | `3V` (RTC `MC146818`) | `(330.20, 232.41)` | **Portabatteria `CR2032` Polo `+` (Positivo)** — Backup RTC CMOS **(SOLO `3V`!)** |
+| **`P8`** | `BAT-_GND` | `GND` | `(330.20, 226.06)` | **Portabatteria `CR2032` Polo `-` (Negativo)** — Massa batteria RTC |
+
+---
+
+## 4. Tastiera Meccanica Dedicata (`keyboard/`)
+
+Consulta [**`keyboard/README.md`**](keyboard/README.md) per la documentazione completa della tastiera, la tabella della matrice $11\times 8$ e il pinout dei connettori.
+
+* **Dimensioni PCB**: `358.0 × 122.0 mm` (FR4 a 2 layer, spessore `1.6 mm`, **0 errori ERC / 0 violazioni DRC**).
+* **Switch Meccanici**: 81 tasti Cherry MX (`SW1..SW81`) disposti nella matrice nativa $11 \times 8$ dell'Aleste 520EX (`KM0..KM10` $\times$ `KM11..KM18`) + 1 tasto Cherry MX dedicato al **Reset Hardware (`SW82`, `SBRES` $\rightarrow$ `GND`)**.
+* **Anti-Ghosting Totale (Full NKRO)**: 81 diodi through-hole `1N4148` (`D1..D81`, package `DO-35`) con catodo (`Pin 1`) sulla colonna `KM0..KM10` e anodo (`Pin 2`) sul `Pin 1` dello switch (orientati per lo strobe attivo-basso generato dal decoder `74LS145` `U80`).
+* **Connessione Flat 1:1**: Due connettori `2x06` passo $2.54\text{ mm}$ (`J1` e `J2`) si collegano direttamente 1:1 ai connettori `X8` e `X9` della scheda madre.
+
+![Vista Superiore Tastiera Meccanica](keyboard/keyboard_top.png)
+
+---
+
+## 5. Case Desktop Custom con Supporti Anti-Flessione (`case/`)
+
+Consulta [**`case/README.md`**](case/README.md) per le istruzioni di stampa 3D, taglio laser della piastra e assemblaggio meccanico.
+
+* **Dimensioni Esterne**: `416.0 × 296.0 × 62.0 mm` (profilo inclinato ergonomico: `32 mm` sul fronte, `62 mm` sul pannello I/O posteriore).
+* **Sistema Strutturale Anti-Flessione a 3 Stadi** (progettato per azzerare qualsiasi flessione della tastiera durante la digitazione lungo i $358\text{ mm}$ di larghezza):
+  1. **Piastra di Montaggio Switch da `1.5 mm`** (`case/keyboard_plate.dxf` pronta per taglio laser in alluminio/acciaio/FR4, oppure stampabile in 3D selezionando `part = "plate"` in `case/Aleste520_Case.scad`).
+  2. **Reticolo Ortogonale di Nervature di Rinforzo** integrato sotto la scocca superiore (`4.0 × 8.0 mm` di battuta perimetrale + 2 costole trasversali + 2 costole longitudinali).
+  3. **7 Colonne Coassiali di Scarico a Compressione (`MH5..MH11`)** che scaricano la forza verticale di digitazione dalla tastiera (`MH1..MH10`) attraverso la scheda madre (`MH5..MH11`) direttamente sul fondo del case.
+
+---
+
+## 6. Guida alla Programmazione di EPROM e PROM Bipolari (`rom/`)
+
+Tutti e 6 i file binari originali presenti nella cartella [`rom/`](rom/) sono **compatibili al 100% bit-per-bit** con questa scheda occidentale: nessuna linea di indirizzo (`A0..A15`) o di dato (`D0..D7`) è stata permutata durante lo sbroglio, e i sostituti occidentali `AM29705` (`U60`, `U61`, `U82`, `U83`) lavorano in modalità trasparente non invertente identica ai `KR1802IR1` originali.
+
+> **🇬🇧 Nota sulla Lingua delle ROM**: Il firmware `rom/AL512.BIN` integra già nativamente **l'interfaccia di boot e setup in lingua inglese** (`ALESTE 520EX`, `PATISONIC 1993`, `SETUP`) e contiene la doppia tabella caratteri **Latino/ASCII occidentale** + Cirillico (commutabile con il tasto `RUS/LAT`).
+
+### 6.1 Tabella di Mappatura Firmware
+
+| File Binario | Dimensione | Zoccolo PCB | Integrato Occidentale (Target) | Equivalenti Compatibili | Integrato Sovietico Originale | Funzione |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `rom/AL512.BIN` | `65.536 B` (64 KB) | **`U31`** | **`27C512`** (DIP-28) | `M27C512`, `AM27C512`, `W27C512` (EEPROM) | `К573РФ4` (`K573RF4`) | BIOS di sistema, BASIC, Boot e AMSDOS |
-| `rom/RFCOLDAT.BIN` | `2.048 B` (2 KB) | **`U62`** | **`2716` / `27C16`** (DIP-24) | `TMS27C16`, `M2716`, **`AT28C16`** (EEPROM) | `К573РФ2` (`K573RF2`) | Lookup Table Palette Colori (`XD0..XD5`, `VRAMACC`) |
-| `rom/RFVDKEY.BIN` | `2.048 B` (2 KB) | **`U65`** | **`2716` / `27C16`** (DIP-24) | `TMS27C16`, `M2716`, **`AT28C16`** (EEPROM) | `К573РФ2` (`K573RF2`) | Sincronismi Video (`SYNC*`, `HY*`, `SINT*`) e Scansione Tastiera (`KK0..KK3`) |
-| `rom/MAPPER.BIN` | `256 B` (`256×4` bit) | **`U28`** | **`AM27S20`** (DIP-16 OC) | `N82S129`, `SN74S287`, `MMI6301`, `MB7052` | `КР556РТ4` (`KR556RT4`) | Mapper Indirizzi Banchi RAM (`MAP14..MAP17`) |
-| `rom/ROMRAM.BIN` | `256 B` (`256×4` bit) | **`U67`** | **`AM27S20`** (DIP-16 OC) | `N82S129`, `SN74S287`, `MMI6301`, `MB7052` | `КР556РТ4` (`KR556RT4`) | Decodifica abilitazione bus (`/ROMEN`, `/RAMEN`, `BUFFER0..1`) |
-| `rom/AF.BIN` | `32 B` (`32×8` bit) | **`U69`** | **`SN74188`** (DIP-16 OC) | `N82S23`, `AM27S18`, `MMI6330`, `TBP18SA030` | `К155РЕ3` (`K155RE3`) | Macchina a stati / precompensazione Floppy Disk Controller |
+| [`rom/AL512.BIN`](rom/AL512.BIN) | `65.536 B` (64 KB) | **`U31`** | **`27C512`** (DIP-28) | `M27C512`, `AM27C512`, `W27C512` (EEPROM) | `К573РФ4` (`K573RF4`) | System BIOS, BASIC, Boot & AMSDOS |
+| [`rom/RFCOLDAT.BIN`](rom/RFCOLDAT.BIN) | `2.048 B` (2 KB) | **`U62`** | **`2716` / `27C16`** (DIP-24) | `TMS27C16`, `M2716`, **`AT28C16`** (EEPROM) | `К573РФ2` (`K573RF2`) | Lookup Palette Colori (`XD0..XD5`, `VRAMACC`) |
+| [`rom/RFVDKEY.BIN`](rom/RFVDKEY.BIN) | `2.048 B` (2 KB) | **`U65`** | **`2716` / `27C16`** (DIP-24) | `TMS27C16`, `M2716`, **`AT28C16`** (EEPROM) | `К573РФ2` (`K573RF2`) | Sincronismi Video (`SYNC*`, `HY*`, `SINT*`) e Scan Tastiera (`KK0..KK3`) |
+| [`rom/MAPPER.BIN`](rom/MAPPER.BIN) | `256 B` (`256×4` bit) | **`U28`** | **`AM27S20`** (DIP-16 OC) | `N82S129`, `SN74S287`, `MMI6301`, `MB7052` | `КР556РТ4` (`KR556RT4`) | Memory Bank Address Mapper (`MAP14..MAP17`) |
+| [`rom/ROMRAM.BIN`](rom/ROMRAM.BIN) | `256 B` (`256×4` bit) | **`U67`** | **`AM27S20`** (DIP-16 OC) | `N82S129`, `SN74S287`, `MMI6301`, `MB7052` | `КР556РТ4` (`KR556RT4`) | Decoder Abilitazione Bus e Banchi (`/ROMEN`, `/RAMEN`, `BUFFER0..1`) |
+| [`rom/AF.BIN`](rom/AF.BIN) | `32 B` (`32×8` bit) | **`U69`** | **`SN74188`** (DIP-16 OC) | `N82S23`, `AM27S18`, `MMI6330`, `TBP18SA030` | `К155РЕ3` (`K155RE3`) | PROM Macchina a Stati / Precompensazione Floppy Disk Controller |
 
-> **⚠️ Nota Critica sulle Uscite Open-Collector (`U28`, `U67`, `U69`)**: Lo schema utilizza PROM bipolari **Open-Collector (OC)** (`82S129` / `AM27S20` per `U28`, `U67` e `82S23` / `SN74188` per `U69`). In particolare, per `U28` (`MAPPER.BIN`) il pin 13 (`CS1`) è pilotato da `/MAPBLK` e le uscite `MAP14..MAP17` sono collegate in wired-OR con i register file open-collector `U87`/`U88` (`74LS170`): **`U28` DEVE quindi essere necessariamente un modello Open-Collector** (`AM27S20` / `82S129` / `74S287`, **non** la versione totem-pole `82S126` / `74S387` / `AM27S21`).
-
----
-
-### 3.2 Materiale e Strumenti Necessari
-
-#### A. Per le 3 EPROM / EEPROM MOS (`U31`, `U62`, `U65`)
-1. **Integrati richiesti**:
-   * **1× `27C512` (DIP-28, 64K×8, tempo di accesso $\le 150\text{ ns}$)** per **`U31`**.
-     * *Consigliati*: Winbond **`W27C512-45Z`** (EEPROM cancellabile elettricamente, drop-in diretto) oppure ST **`M27C512-10F1`**.
-   * **2× `27C16` / `2716` (DIP-24, 2K×8, tempo di accesso $\le 150\text{ ns}$)** per **`U62`** e **`U65`**.
-     * *Requisito di velocità*: `U62` e `U65` lavorano su reti combinatorie video/I/O (`RFCOLDAT` e `RFVDKEY`). Usare versioni CMOS veloci ($\le 150\text{ ns}$) oppure **Atmel `AT28C16-15PC` (EEPROM parallela DIP-24 da 150 ns)**.
-     * **Perché la `AT28C16` è fortemente consigliata per `U62` e `U65`**: Su questo PCB il Pin 21 (`VPP` sulla `2716`, `~WE` sulla `AT28C16`) è collegato direttamente a `VCC (+5V)`. Ciò significa che una **`AT28C16` è 100% plug-and-play negli zocoli `U62` e `U65` senza alcun adattatore**, si programma a 5V con qualsiasi programmatore USB economico ed evita la tensione di programmazione $V_{PP} = 25\text{ V}$ richiesta dalle vecchie `2716` NMOS!
-2. **Strumenti necessari**:
-   * **Programmatore Universale USB**: **XGecu TL866II Plus**, **T48 (TL866-3G)**, **T56** oppure **GQ-4X4**.
-   * *(Se si usano `27C512` / `2716` con finestra UV)*: **Cancellatore UV per EPROM** (lampada UV-C a 253,7 nm, ~15–20 minuti di esposizione) ed etichette opache per coprire la finestra al quarzo dopo la scrittura.
-   * *(Se si usano `2716` NMOS d'epoca a $25\text{ V}$)*: Assicurarsi che il programmatore supporti $V_{PP} = 25\text{ V}$ (es. XGecu **T48**/**T56** o GQ-4X con alimentatore esterno; il vecchio TL866II Plus arriva solo a $18\text{ V}$).
-
-#### B. Per le 3 PROM Bipolari a Fusibili (`U28`, `U67`, `U69`)
-1. **Integrati richiesti**:
-   * **2× `82S129` / `AM27S20` / `SN74S287` (DIP-16, 256×4 Open-Collector, $\le 50\text{ ns}$)** per **`U28`** e **`U67`**.
-   * **1× `82S23` / `SN74188` / `AM27S18` (DIP-16, 32×8 Open-Collector, $\le 50\text{ ns}$)** per **`U69`**.
-2. **Strumenti necessari**:
-   * ⚠️ **I normali programmatori USB economici (TL866II / T48) NON possono programmare le PROM bipolari a fusibili** (`82S129`, `82S23`, `74S287`, `74188`), poiché la bruciatura fisica dei fusibili al Nichel-Cromo / Titanio-Tungsteno richiede impulsi regolati ad alta corrente.
-   * È necessario uno dei seguenti strumenti:
-     * **Programmatore Professionale / Vintage**: **Data I/O** (29B / Unipak 2B, 2900, 3900), **Hi-Lo Systems** (`ALL-03`, `ALL-07`, `ALL-11`), **Elnec BeeProg**, **Xeltek SuperPro** (modelli con supporto PROM bipolari), o **Stag PP39 / PP42**.
-     * **Programmatore DIY con Arduino Mega**: Shield open-source per Arduino Mega dedicati alle `82S23`/`74188` e `82S129`/`74S287` (con tensione commutata a $12\text{ V}$–$12,5\text{ V}$ per bruciare un bit alla volta).
-
----
-
-### 3.3 Procedura Passo-Passo di Programmazione
-
-1. **`U31` — ROM di Sistema (`rom/AL512.BIN`, 65.536 byte)**:
-   * **Dispositivo**: `27C512` (o `W27C512`) in formato DIP-28.
-   * **Blank Check**: Verificare che il chip sia vergine (tutti i byte a `0xFF`).
-   * **Caricamento File**: Caricare `rom/AL512.BIN` in formato Binario (`BINARY`) all'offset `0x0000`–`0xFFFF`.
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x0000` devono essere `01 89 7F ED 49 C3 91 05`.
-   * **Scrittura e Verifica**: Programmare e verificare il contenuto, quindi inserire nello zoccolo **`U31`**.
-
-2. **`U62` — Lookup Palette Colori (`rom/RFCOLDAT.BIN`, 2.048 byte)**:
-   * **Dispositivo**: `AT28C16` (consigliata, 150 ns) oppure `27C16` / `2716` in formato DIP-24.
-   * **Caricamento File**: Caricare `rom/RFCOLDAT.BIN` in formato Binario all'offset `0x0000`–`0x07FF`.
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x0000` devono essere `00 01 02 03 04 05 06 07`.
-   * **Scrittura e Verifica**: Programmare e inserire nello zoccolo **`U62`**.
-
-3. **`U65` — Sincronismi Video e Scansione Tastiera (`rom/RFVDKEY.BIN`, 2.048 byte)**:
-   * **Dispositivo**: `AT28C16` (consigliata, 150 ns) oppure `27C16` / `2716` in formato DIP-24.
-   * **Caricamento File**: Caricare `rom/RFVDKEY.BIN` in formato Binario all'offset `0x0000`–`0x07FF`.
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x0000` devono essere `EB DB DE FA FA FA FB 6B`.
-   * **Scrittura e Verifica**: Programmare e inserire nello zoccolo **`U65`**.
-
-4. **`U28` — PROM Mapper Memoria (`rom/MAPPER.BIN`, 256 byte, 256×4 bit)**:
-   * **Dispositivo**: `82S129` / `AM27S20` / `SN74S287` (DIP-16, Open-Collector).
-   * **Formato Dati**: Ciascuno dei 256 byte in `rom/MAPPER.BIN` contiene la parola a 4 bit (`O3..O0` = `MAP17..MAP14`) nel **nibble basso (bit `0..3`)**, mentre il nibble alto (`bit 4..7`) vale `0`.
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x00` devono essere `00 01 02 03 00 01 02 07`.
-   * **Scrittura e Verifica**: Programmare e inserire nello zoccolo **`U28`**.
-
-5. **`U67` — PROM Decodifica Bus e Banchi (`rom/ROMRAM.BIN`, 256 byte, 256×4 bit)**:
-   * **Dispositivo**: `82S129` / `AM27S20` / `SN74S287` (DIP-16, Open-Collector).
-   * **Formato Dati**: Ciascuno dei 256 byte in `rom/ROMRAM.BIN` contiene la parola a 4 bit (`O3=/RAMEN`, `O2=/ROMEN`, `O1=BUFFER1`, `O0=BUFFER0`) nel **nibble basso (bit `0..3`)**.
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x00` devono essere `0B 06 0B 06 06 06 06 06`.
-   * **Scrittura e Verifica**: Programmare e inserire nello zoccolo **`U67`**.
-
-6. **`U69` — PROM Macchina a Stati / Precompensazione FDC (`rom/AF.BIN`, 32 byte, 32×8 bit)**:
-   * **Dispositivo**: `SN74188` / `82S23` / `AM27S18` (DIP-16, Open-Collector).
-   * **Formato Dati**: 32 byte (`0x00..0x1F`); i bit `D0..D3` pilotano `FP0..FP3` e il bit `D4` pilota `WRC` (i bit `D5..D7` non sono connessi sullo schema).
-   * **Controllo Buffer**: I primi 8 byte all'indirizzo `0x00` devono essere `11 11 02 03 03 04 05 06`.
-   * **Scrittura e Verifica**: Programmare e inserire nello zoccolo **`U69`**.
+> **⚠️ Nota Critica sul Tipo di Uscita (`U28`, `U67`, `U69`)**: Lo schema originale utilizza PROM bipolari con uscite **Open-Collector (OC)** (`82S129` / `AM27S20` per `U28`, `U67` e `82S23` / `SN74188` per `U69`). In particolare, su `U28` (`MAPPER.BIN`) il pin 13 (`CS1`) è pilotato da `/MAPBLK` e le uscite `MAP14..MAP17` sono collegate in **wired-OR** diretto con i register file open-collector `U87`/`U88` (`74LS170`): pertanto **`U28` DEVE obbligatoriamente essere un modello Open-Collector** (`AM27S20` / `82S129` / `74S287`, e **non** la versione totem-pole/tri-state `82S126` / `74S387` / `AM27S21`).

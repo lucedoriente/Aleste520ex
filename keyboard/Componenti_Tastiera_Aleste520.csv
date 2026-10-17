@@ -1,0 +1,7 @@
+﻿Categoria;Riferimento;Valore / Funzione;Footprint KiCad;Quantita;Note Tecniche
+Connettori;J1;X8_COLS_2x06;Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical;1;Header standard 2x06 passo 2.54mm (Colonne KM0..KM10 + GND)
+Connettori;J2;X9_ROWS_2x06;Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical;1;Header standard 2x06 passo 2.54mm (Righe KM11..KM18 + SBRES + GND)
+Switch Meccanici;SW1..SW81;Cherry MX 1.00u (Matrice 81 Tasti);Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB;81;Switch meccanici Cherry MX / Gateron 5-pin PCB-mount + Plate-mount
+Switch Reset;SW82;RESET (SBRES -> GND);Button_Switch_Keyboard:SW_Cherry_MX_1.00u_PCB;1;Tasto Hardware Reset verso massa (SBRES)
+Diodi Anti-Ghosting;D1..D81;1N4148;Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal;81;Diodi switching DO-35 (Catodo su Colonna KM0..KM10, Anodo su SW Pin 1)
+Fissaggio Anti-Flex;MH1..MH10;M3_AntiFlex (Foro 3.2mm);MountingHole:MountingHole_3.2mm_M3_Pad;10;Fori M3 metallizzati a GND per colonnine anti-flessione piastra/case
