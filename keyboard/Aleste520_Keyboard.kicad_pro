@@ -230,6 +230,12 @@
   "cvpcb": {
     "equivalence_files": []
   },
+  "erc": {
+    "rule_severities": {
+      "lib_symbol_issues": "ignore",
+      "lib_symbol_mismatch": "ignore"
+    }
+  },
   "libraries": {
     "pinned_footprint_libs": [],
     "pinned_symbol_libs": []
@@ -321,11 +327,5 @@
     "subpart_id_separator": 0
   },
   "sheets": [],
-  "text_variables": {},
-  "erc": {
-    "rule_severities": {
-      "lib_symbol_mismatch": "ignore",
-      "lib_symbol_issues": "ignore"
-    }
-  }
+  "text_variables": {}
 }
