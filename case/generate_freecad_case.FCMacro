@@ -1,0 +1,295 @@
+# -*- coding: utf-8 -*-
+# ============================================================================
+# ALESTE 520EX — Native FreeCAD 1.1 Parametric 3D Case & Anti-Flex Keyboard Plate
+# ============================================================================
+# Generates:
+#   - case/Aleste520_Case.FCStd          (Full multi-body FreeCAD Assembly + Split Quadrants)
+#   - case/Aleste520_Bottom_Case.FCStd   (Standalone Bottom Case Tray)
+#   - case/Aleste520_Top_Cover.FCStd     (Standalone Sloped Top Cover with Anti-Flex Ribs)
+#   - case/Aleste520_Switch_Plate.FCStd  (Standalone 1.5mm Cherry MX Switch Plate)
+#   - case/Aleste520_Case.step           (ISO 10303-21 STEP CAD Exchange File)
+# ============================================================================
+
+import os
+import FreeCAD as App
+import Part
+
+out_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else os.path.abspath("case")
+
+# --- 1. Reference Motherboard & Enclosure Parameters (mm) ---
+pcb_w          = 400.9
+pcb_d          = 280.5
+pcb_t          = 1.6
+pcb_x_min      = 16.0
+pcb_y_min      = 19.5
+pcb_y_max      = 300.0
+
+wall_t         = 4.0     # Outer structural wall thickness
+floor_t        = 3.5     # Base floor thickness
+clearance      = 3.5     # Internal perimeter clearance around PCB
+standoff_h     = 8.0     # Height of M3 motherboard standoffs above floor
+
+ext_w          = pcb_w + 2 * (wall_t + clearance)  # 415.9 mm
+ext_d          = pcb_d + 2 * (wall_t + clearance)  # 295.5 mm
+lower_h        = 28.0    # Bottom tray wall height
+upper_front_h  = 12.0    # Top cover front edge height (total front = 40mm)
+upper_rear_h   = 34.0    # Top cover rear edge height (total rear = 62mm)
+
+kb_origin_x    = 24.0    # CAD X start of keyboard bezel
+kb_origin_y    = 18.0    # CAD Y start of keyboard bezel
+kb_w           = 358.0   # Keyboard PCB & plate width
+kb_d           = 122.0   # Keyboard PCB & plate depth
+plate_t        = 1.5     # Cherry MX switch mounting plate thickness
+
+def pcb_to_cad_x(x_pcb):
+    return wall_t + clearance + (x_pcb - pcb_x_min)
+
+def pcb_to_cad_y(y_pcb):
+    return wall_t + clearance + (pcb_y_max - y_pcb)
+
+# 11 M3 Mounting Holes from board/Aleste520v4.kicad_pcb: (x_pcb, y_pcb, is_kb_antiflex)
+mh_coords = [
+    ( 23.5,  24.0, False),  # MH1  Rear-Left
+    (215.0,  24.0, False),  # MH2  Rear-Center-Left
+    (273.0,  24.0, False),  # MH3  Rear-Center-Right
+    (411.5,  24.0, False),  # MH4  Rear-Right
+    ( 41.0, 130.0, True ),  # MH5  Mid-Left (Keyboard Rear Anti-Flex Pillar)
+    (220.0, 131.0, True ),  # MH6  Center (Keyboard Center Anti-Flex Pillar)
+    (409.5, 148.0, True ),  # MH7  Mid-Right (Keyboard Right Anti-Flex Pillar)
+    ( 23.5, 286.5, True ),  # MH8  Front-Left (Keyboard Front Anti-Flex Pillar)
+    (148.0, 285.5, True ),  # MH9  Front-Center-Left (Keyboard Front Anti-Flex Pillar)
+    (283.5, 286.5, True ),  # MH10 Front-Center-Right (Keyboard Front Anti-Flex Pillar)
+    (406.5, 256.5, True ),  # MH11 Front-Right L-Wing (Keyboard Front-Right Anti-Flex Pillar)
+]
+
+# 10 M3 Anti-Flex Mounting Holes on keyboard/Aleste520_Keyboard.kicad_pcb
+kb_mh_coords = [
+    (  4.0,   4.0), (124.0,   4.0), (244.0,   4.0), (354.0,   4.0),
+    (  4.0,  61.0), (128.8,  49.0), (248.8,  49.0), (354.0,  61.0),
+    (  4.0, 118.0), (354.0, 118.0)
+]
+
+# ============================================================================
+# BUILD PART 1: BOTTOM CASE TRAY (with 11 M3 Standoffs, 7 Anti-Flex Columns & PicoPSU Bay)
+# ============================================================================
+def build_bottom_case():
+    outer = Part.makeBox(ext_w, ext_d, lower_h)
+    inner = Part.makeBox(ext_w - 2*wall_t, ext_d - 2*wall_t, lower_h, App.Vector(wall_t, wall_t, floor_t))
+    tray = outer.cut(inner)
+
+    # Rear I/O Connector Cutouts + PicoPSU 12V DC Jack & Power Switch
+    rear_z = floor_t + standoff_h + pcb_t
+    cutouts = []
+    # X2 DB9 Joystick/Mouse (X_pcb = 38.6)
+    cutouts.append(Part.makeBox(32.0, wall_t + 4.0, 15.0, App.Vector(pcb_to_cad_x(38.6) - 16.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
+    # X5 Audio/RGB DIN connectors (X_pcb = 60..92)
+    cutouts.append(Part.makeBox(44.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(60.0) - 10.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
+    # X1 Expansion Slot 62-pin (X_pcb = 113..197)
+    cutouts.append(Part.makeBox(85.5, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(112.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
+    # X6 DIN connector (X_pcb = 211.0)
+    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(211.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
+    # X4 Floppy Slot 34-pin (X_pcb = 226..272)
+    cutouts.append(Part.makeBox(47.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(225.5), ext_d - wall_t - 2.0, rear_z - 4.0)))
+    # X7 Serial DIN-8 (X_pcb = 309.0)
+    cutouts.append(Part.makeBox(18.0, wall_t + 4.0, 18.0, App.Vector(pcb_to_cad_x(309.0) - 9.0, ext_d - wall_t - 2.0, rear_z - 2.0)))
+    # PicoPSU 12V DC Barrel Jack (D=11.4mm) at X_pcb = 365.0
+    dc_jack = Part.makeCylinder(5.7, wall_t + 4.0, App.Vector(pcb_to_cad_x(365.0), ext_d + 2.0, rear_z + 6.0), App.Vector(0, -1, 0))
+    cutouts.append(dc_jack)
+    # Rear Power Rocker Switch (19.4 x 13.2 mm) at X_pcb = 380.0
+    cutouts.append(Part.makeBox(19.4, wall_t + 4.0, 13.2, App.Vector(pcb_to_cad_x(380.0), ext_d - wall_t - 2.0, rear_z)))
+
+    # Side ventilation slots
+    vy = 40.0
+    while vy <= ext_d - 40.0:
+        cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(-2.0, vy, floor_t + 4.0)))
+        cutouts.append(Part.makeBox(wall_t + 4.0, 4.0, 18.0, App.Vector(ext_w - wall_t - 2.0, vy, floor_t + 4.0)))
+        vy += 12.0
+
+    tray = tray.cut(Part.makeCompound(cutouts))
+
+    # Internal Floor Stiffening Grid Ribs + Standoffs
+    adds = []
+    for rx in range(80, int(ext_w - 60), 80):
+        adds.append(Part.makeBox(2.4, ext_d - 2*wall_t, 3.0, App.Vector(rx, wall_t, floor_t)))
+    for ry in range(65, int(ext_d - 50), 65):
+        adds.append(Part.makeBox(ext_w - 2*wall_t, 2.4, 3.0, App.Vector(wall_t, ry, floor_t)))
+
+    # 11 M3 Motherboard Standoffs + 7 Coaxial Upper Anti-Flex Keyboard Support Columns
+    for x_pcb, y_pcb, is_kb in mh_coords:
+        cx = pcb_to_cad_x(x_pcb)
+        cy = pcb_to_cad_y(y_pcb)
+        cone = Part.makeCone(4.5, 3.5, standoff_h, App.Vector(cx, cy, floor_t))
+        hole = Part.makeCylinder(1.45, standoff_h + 1.0, App.Vector(cx, cy, floor_t))
+        adds.append(cone.cut(hole))
+        if is_kb:
+            # Coaxial upper sleeve transferring typing force from Keyboard PCB/Plate to Motherboard standoff
+            z_col = floor_t + standoff_h + pcb_t
+            col_outer = Part.makeCylinder(3.6, 18.0, App.Vector(cx, cy, z_col))
+            col_inner = Part.makeCylinder(1.65, 18.5, App.Vector(cx, cy, z_col - 0.2))
+            adds.append(col_outer.cut(col_inner))
+
+    # 4 PicoPSU DC-DC Mounting Bosses in Front-Right L-Cutout Bay
+    for px in (pcb_to_cad_x(320.0), pcb_to_cad_x(390.0)):
+        for py in (pcb_to_cad_y(294.0), pcb_to_cad_y(274.0)):
+            boss = Part.makeCylinder(3.25, standoff_h, App.Vector(px, py, floor_t))
+            bhole = Part.makeCylinder(1.4, standoff_h + 1.0, App.Vector(px, py, floor_t))
+            adds.append(boss.cut(bhole))
+
+    for a in adds:
+        tray = tray.fuse(a)
+    return tray
+
+# ============================================================================
+# BUILD PART 2: SLOPED TOP COVER WITH ORTHOGONAL ANTI-FLEX KEYBOARD RIBS
+# ============================================================================
+def make_wedge(w, d, h_front, h_rear, y_flat_rear=140.0):
+    # Profile in YZ plane extruded along X
+    pts = [
+        App.Vector(0, 0, 0),
+        App.Vector(0, d, 0),
+        App.Vector(0, d, h_rear),
+        App.Vector(0, d - y_flat_rear, h_rear),
+        App.Vector(0, 0, h_front),
+        App.Vector(0, 0, 0)
+    ]
+    wire = Part.makePolygon(pts)
+    face = Part.Face(wire)
+    return face.extrude(App.Vector(w, 0, 0))
+
+def build_top_cover():
+    outer = make_wedge(ext_w, ext_d, upper_front_h, upper_rear_h, 140.0)
+    inner = make_wedge(ext_w - 2*wall_t, ext_d - 2*wall_t, upper_front_h - 3.5, upper_rear_h - 3.5, 140.0 - wall_t)
+    inner.translate(App.Vector(wall_t, wall_t, -0.1))
+    cover = outer.cut(inner)
+
+    # Recessed Keyboard Bezel Opening (358.0 x 122.0 mm)
+    kb_cut = Part.makeBox(kb_w, kb_d, upper_rear_h + 10.0, App.Vector(kb_origin_x, kb_origin_y, -2.0))
+    cover = cover.cut(kb_cut)
+
+    # Status LED Holes
+    led1 = Part.makeCylinder(1.6, upper_rear_h + 10.0, App.Vector(kb_origin_x + kb_w + 12.0, kb_origin_y + 100.0, -2.0))
+    led2 = Part.makeCylinder(1.6, upper_rear_h + 10.0, App.Vector(kb_origin_x + kb_w + 22.0, kb_origin_y + 100.0, -2.0))
+    cover = cover.cut(led1).cut(led2)
+
+    # Anti-Flex Perimeter Ledge (4.0mm wide, 8.0mm tall) around Keyboard Bay
+    ledge_w = 4.0
+    ledge_z = 8.0
+    ledge_outer = Part.makeBox(kb_w + 2*ledge_w, kb_d + 2*ledge_w, ledge_z, App.Vector(kb_origin_x - ledge_w, kb_origin_y - ledge_w, 0))
+    ledge_inner = Part.makeBox(kb_w - 5.0, kb_d - 5.0, ledge_z + 2.0, App.Vector(kb_origin_x + 2.5, kb_origin_y + 2.5, -1.0))
+    ledge = ledge_outer.cut(ledge_inner)
+    cover = cover.fuse(ledge)
+
+    # 2 Transverse Anti-Flex Support Ribs under the Keyboard Plate (aligned with x=128.8 and x=248.8)
+    for kx in (kb_origin_x + 128.8, kb_origin_x + 248.8):
+        rib_x = Part.makeBox(3.0, kb_d, ledge_z - 1.5, App.Vector(kx - 1.5, kb_origin_y, 0))
+        cover = cover.fuse(rib_x)
+
+    # 2 Longitudinal Anti-Flex Support Ribs between key rows
+    for ky in (kb_origin_y + (kb_d - 54.8), kb_origin_y + (kb_d - 89.2)):
+        rib_y = Part.makeBox(kb_w, 2.4, ledge_z - 1.5, App.Vector(kb_origin_x, ky - 1.2, 0))
+        cover = cover.fuse(rib_y)
+
+    return cover
+
+# ============================================================================
+# BUILD PART 3: 1.5mm CHERRY MX SWITCH MOUNTING PLATE (82 Cutouts + 10 M3 Holes)
+# ============================================================================
+def build_switch_plate():
+    plate = Part.makeBox(kb_w, kb_d, plate_t)
+    sw_cut = 14.0
+    holes = []
+    for py in range(6):
+        for px in range(14):
+            if py == 5 and px in (11, 12):
+                continue
+            cx = 24.0 + px * 24.0
+            cy = kb_d - (29.0 + py * 17.2)
+            holes.append(Part.makeBox(sw_cut, sw_cut, plate_t + 2.0, App.Vector(cx - sw_cut/2.0, cy - sw_cut/2.0, -1.0)))
+
+    for mx, my in kb_mh_coords:
+        holes.append(Part.makeCylinder(1.6, plate_t + 2.0, App.Vector(mx, kb_d - my, -1.0)))
+
+    plate = plate.cut(Part.makeCompound(holes))
+    return plate
+
+print("Building Bottom Case, Top Cover, and 1.5mm Switch Plate B-Rep solids...")
+bottom_shape = build_bottom_case()
+top_shape    = build_top_cover()
+plate_shape  = build_switch_plate()
+
+# Create Quadrant Splits for 256x256mm 3D Printers
+mid_x = ext_w / 2.0
+mid_y = ext_d / 2.0
+q1_box = Part.makeBox(mid_x, mid_y, 100.0, App.Vector(0, 0, -5.0))
+q2_box = Part.makeBox(mid_x + 5.0, mid_y, 100.0, App.Vector(mid_x, 0, -5.0))
+q3_box = Part.makeBox(mid_x, mid_y + 5.0, 100.0, App.Vector(0, mid_y, -5.0))
+q4_box = Part.makeBox(mid_x + 5.0, mid_y + 5.0, 100.0, App.Vector(mid_x, mid_y, -5.0))
+
+bottom_q1 = bottom_shape.common(q1_box)
+bottom_q2 = bottom_shape.common(q2_box)
+bottom_q3 = bottom_shape.common(q3_box)
+bottom_q4 = bottom_shape.common(q4_box)
+
+# ============================================================================
+# SAVE MAIN ASSEMBLY DOCUMENT: case/Aleste520_Case.FCStd
+# ============================================================================
+doc = App.newDocument("Aleste520_Case")
+
+obj_bot = doc.addObject("Part::Feature", "Bottom_Case")
+obj_bot.Label = "01_Bottom_Case_Tray"
+obj_bot.Shape = bottom_shape
+
+obj_plate = doc.addObject("Part::Feature", "Switch_Plate_1_5mm")
+obj_plate.Label = "02_Keyboard_Switch_Plate_1_5mm"
+plate_placed = plate_shape.copy()
+plate_placed.translate(App.Vector(kb_origin_x, kb_origin_y, lower_h + 6.5))
+obj_plate.Shape = plate_placed
+
+obj_top = doc.addObject("Part::Feature", "Top_Cover")
+obj_top.Label = "03_Top_Cover_Sloped_AntiFlex"
+top_placed = top_shape.copy()
+top_placed.translate(App.Vector(0, 0, lower_h))
+obj_top.Shape = top_placed
+
+# Add printable quadrants group
+grp = doc.addObject("App::DocumentObjectGroup", "Printable_Quadrants_256x256")
+grp.Label = "04_Printable_Quadrants_256x256mm"
+for qname, qlabel, qshape in [
+    ("Bottom_Q1_FrontLeft",  "Bottom_Q1_FrontLeft",  bottom_q1),
+    ("Bottom_Q2_FrontRight", "Bottom_Q2_FrontRight", bottom_q2),
+    ("Bottom_Q3_RearLeft",   "Bottom_Q3_RearLeft",   bottom_q3),
+    ("Bottom_Q4_RearRight",  "Bottom_Q4_RearRight",  bottom_q4),
+]:
+    qo = doc.addObject("Part::Feature", qname)
+    qo.Label = qlabel
+    qo.Shape = qshape
+    grp.addObject(qo)
+
+doc.recompute()
+fcstd_main = os.path.join(out_dir, "Aleste520_Case.FCStd")
+doc.saveAs(fcstd_main)
+print("Saved:", fcstd_main)
+
+# Export STEP file
+step_path = os.path.join(out_dir, "Aleste520_Case.step")
+Part.export([obj_bot, obj_plate, obj_top], step_path)
+print("Saved:", step_path)
+
+# Save standalone FreeCAD documents for each of the 3 parts
+for fname, dname, shp in [
+    ("Aleste520_Bottom_Case.FCStd",  "Aleste520_Bottom_Case",  bottom_shape),
+    ("Aleste520_Top_Cover.FCStd",    "Aleste520_Top_Cover",    top_shape),
+    ("Aleste520_Switch_Plate.FCStd", "Aleste520_Switch_Plate", plate_shape),
+]:
+    d = App.newDocument(dname)
+    o = d.addObject("Part::Feature", dname)
+    o.Label = dname
+    o.Shape = shp
+    d.recompute()
+    p = os.path.join(out_dir, fname)
+    d.saveAs(p)
+    App.closeDocument(d.Name)
+    print("Saved:", p)
+
+App.closeDocument(doc.Name)
+print("All FreeCAD documents generated successfully.")

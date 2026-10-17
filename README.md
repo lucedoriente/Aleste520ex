@@ -18,7 +18,7 @@ The repository is organized into four modular directories:
 | :--- | :--- | :--- |
 | **[`board/`](board/)** | `Aleste520v4.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Aleste520v4.csv` | **Motherboard (`400.9 × 280.5 mm`)**: 100% Western THT ICs (`U1..U89`), standard `2.54 mm` `2x06` keyboard headers (`X8`, `X9`), 11 `M3` mounting holes (`MH1..MH11`), labeled power/RTC pads (`P1..P8`), **0 ERC / 0 DRC errors**. |
 | **[`keyboard/`](keyboard/)** | `Aleste520_Keyboard.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Tastiera_Aleste520.csv`, [`README.md`](keyboard/README.md) | **Mechanical Keyboard (`358.0 × 122.0 mm`)**: 82 Cherry MX switches (`SW1..SW81` matrix + `SW82` Hardware Reset), 81 `1N4148` anti-ghosting diodes (Full NKRO), standard `2.54 mm` `2x06` IDC headers (`J1`, `J2`), 10 `M3` anti-flex mounting holes (`MH1..MH10`), **0 ERC / 0 DRC errors**. |
-| **[`case/`](case/)** | `Aleste520_Case.scad`, `keyboard_plate.dxf`, [`README.md`](case/README.md) | **Custom Desktop Enclosure (`416.0 × 296.0 × 62.0 mm`)**: Parametric OpenSCAD 3D CAD model (Bottom Base Tray, Sloped Top Cover, `1.5 mm` Switch Mounting Plate, and 4-quadrant split mode for standard $256\times 256\text{ mm}$ 3D printers) + laser-cut ready `keyboard_plate.dxf` with a **3-Stage Anti-Flex Keyboard Support System**. |
+| **[`case/`](case/)** | `Aleste520_Case.FCStd`, `Aleste520_Case.step`, `keyboard_plate.dxf`, [`README.md`](case/README.md) | **Custom Desktop Enclosure (`416.0 × 296.0 × 62.0 mm`)**: Native FreeCAD 1.1 3D CAD project (`Aleste520_Case.FCStd`, `Aleste520_Bottom_Case.FCStd`, `Aleste520_Top_Cover.FCStd`, `Aleste520_Switch_Plate.FCStd`, `Aleste520_Case.step`) (Bottom Base Tray, Sloped Top Cover, `1.5 mm` Switch Mounting Plate, and 4-quadrant split mode for standard $256\times 256\text{ mm}$ 3D printers) + laser-cut ready `keyboard_plate.dxf` with a **3-Stage Anti-Flex Keyboard Support System**. |
 | **[`rom/`](rom/)** | `AL512.BIN`, `RFCOLDAT.BIN`, `RFVDKEY.BIN`, `MAPPER.BIN`, `ROMRAM.BIN`, `AF.BIN` | **Original Firmware Images**: 100% bit-compatible with this Western hardware reproduction (English boot menu, standard ASCII/Latin + Cyrillic support). |
 
 ---
@@ -50,7 +50,7 @@ The Aleste 520EX motherboard is powered primarily by **`+5V DC`** (`VCC` plane, 
 For complete electrical safety (eliminating any high-voltage $220\text{ V AC}$ inside the 3D-printed enclosure):
 1. **External AC/DC Brick ($220\text{ V AC} \rightarrow 12\text{ V DC}$)**: Use a certified external **`12V DC / 5A (60W)`** switching power adapter with a standard `5.5 × 2.5 mm` DC barrel plug.
 2. **Internal DC-DC PicoPSU (`PicoPSU-80` / `PicoPSU-120` or `12V->5V 5A` Buck)**:
-   * Mount the panel-mount `5.5 × 2.5 mm` DC barrel jack and optional rocker switch into the dedicated rear cutouts provided in [`case/Aleste520_Case.scad`](case/Aleste520_Case.scad).
+   * Mount the panel-mount `5.5 × 2.5 mm` DC barrel jack and optional rocker switch into the dedicated rear cutouts provided in [`case/Aleste520_Case.FCStd`](case/Aleste520_Case.FCStd).
    * Connect the `PS_ON#` (Green wire, Pin 16 on the ATX 24-pin header) of the PicoPSU to `GND` (Black wire, Pin 15/17) via the rear power switch so the PicoPSU turns on when switched.
    * Feed `+5V` and `+12V` from the PicoPSU (using the 4-pin Molex / SATA power cable or ATX header) to the motherboard pads `P1..P6` as detailed below.
 
@@ -88,7 +88,7 @@ See [**`case/README.md`**](case/README.md) for printing, laser-cutting, and asse
 
 * **External Dimensions**: `416.0 × 296.0 × 62.0 mm` (wedged profile: `32 mm` front typing height, `62 mm` rear I/O panel height).
 * **3-Stage Anti-Flex Keyboard Support System** (eliminating typing deflection across the $358\text{ mm}$ span):
-  1. **`1.5 mm` Rigid Switch Mounting Plate** (`case/keyboard_plate.dxf` for laser-cut aluminum/steel/FR4, or 3D-printed via `part = "plate"` in `case/Aleste520_Case.scad`).
+  1. **`1.5 mm` Rigid Switch Mounting Plate** (`case/keyboard_plate.dxf` for laser-cut aluminum/steel/FR4, or 3D-printed from `case/Aleste520_Switch_Plate.FCStd`).
   2. **Orthogonal Internal Stiffening Grid** built into the underside of the Top Cover (`4.0 × 8.0 mm` perimeter ledge + 2 transverse ribs + 2 longitudinal ribs).
   3. **7 Coaxial Anti-Flex Support Columns (`MH5..MH11`)** transferring vertical typing force straight through the Keyboard PCB (`MH1..MH10`) and Motherboard (`MH5..MH11`) down to the Bottom Case floor.
 
@@ -122,3 +122,4 @@ All 6 original binary files in the [`rom/`](rom/) directory are **100% bit-for-b
   * **2× `82S129` / `AM27S20` / `SN74S287` (DIP-16, 256×4 OC)** for **`U28`** and **`U67`**.
   * **1× `82S23` / `SN74188` / `AM27S18` (DIP-16, 32×8 OC)** for **`U69`**.
   * **Programmer**: Industrial programmer supporting bipolar fuse PROMs (**Data I/O**, **Hi-Lo ALL-03/07/11**, **Elnec BeeProg**, **Stag PP39/42**) or an open-source **Arduino Bipolar PROM Programmer**.
+

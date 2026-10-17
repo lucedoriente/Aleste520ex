@@ -18,7 +18,7 @@ Il progetto è suddiviso in quattro directory modulari:
 | :--- | :--- | :--- |
 | **[`board/`](board/)** | `Aleste520v4.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Aleste520v4.csv` | **Scheda Madre (`400.9 × 280.5 mm`)**: 100% IC occidentali THT (`U1..U89`), connettori tastiera standard `2x06` passo `2.54 mm` (`X8`, `X9`), 11 fori di fissaggio `M3` (`MH1..MH11`), piazzole alimentazione/batteria RTC etichettate (`P1..P8`), **0 errori ERC / 0 violazioni DRC**. |
 | **[`keyboard/`](keyboard/)** | `Aleste520_Keyboard.kicad_pro`, `.kicad_sch`, `.kicad_pcb`, `Componenti_Tastiera_Aleste520.csv`, [`README.md`](keyboard/README.md) | **Tastiera Meccanica (`358.0 × 122.0 mm`)**: 82 switch Cherry MX (`SW1..SW81` matrice + `SW82` Reset Hardware), 81 diodi `1N4148` anti-ghosting (Full NKRO), connettori IDC `2x06` passo `2.54 mm` (`J1`, `J2`), 10 fori `M3` anti-flessione (`MH1..MH10`), **0 errori ERC / 0 violazioni DRC**. |
-| **[`case/`](case/)** | `Aleste520_Case.scad`, `keyboard_plate.dxf`, [`README.md`](case/README.md) | **Case Desktop Custom (`416.0 × 296.0 × 62.0 mm`)**: Modello 3D parametrico OpenSCAD (Base Inferiore, Scocca Superiore inclinata, Piastra Switch `1.5 mm` e modalità suddivisa in 4 quadranti per stampanti 3D $256\times 256\text{ mm}$) + file `keyboard_plate.dxf` pronto per taglio laser con **Sistema di Supporto Tastiera Anti-Flessione a 3 Stadi**. |
+| **[`case/`](case/)** | `Aleste520_Case.FCStd`, `Aleste520_Case.step`, `keyboard_plate.dxf`, [`README.md`](case/README.md) | **Case Desktop Custom (`416.0 × 296.0 × 62.0 mm`)**: Progetto 3D nativo FreeCAD 1.1 (`Aleste520_Case.FCStd`, `Aleste520_Bottom_Case.FCStd`, `Aleste520_Top_Cover.FCStd`, `Aleste520_Switch_Plate.FCStd`, `Aleste520_Case.step`) (Base Inferiore, Scocca Superiore inclinata, Piastra Switch `1.5 mm` e modalità suddivisa in 4 quadranti per stampanti 3D $256\times 256\text{ mm}$) + file `keyboard_plate.dxf` pronto per taglio laser con **Sistema di Supporto Tastiera Anti-Flessione a 3 Stadi**. |
 | **[`rom/`](rom/)** | `AL512.BIN`, `RFCOLDAT.BIN`, `RFVDKEY.BIN`, `MAPPER.BIN`, `ROMRAM.BIN`, `AF.BIN` | **Immagini Firmware Originali**: 100% compatibili bit-per-bit con questa scheda occidentale (interfaccia di boot/setup nativa in inglese, supporto set caratteri Latino/ASCII e Cirillico). |
 
 ---
@@ -50,7 +50,7 @@ La scheda madre dell'Aleste 520EX richiede principalmente **`+5V DC`** (piano `V
 Per garantire la massima sicurezza elettrica ed evitare di portare la tensione di rete a $220\text{ V AC}$ all'interno del case stampato in 3D:
 1. **Alimentatore Esterno AC/DC ($220\text{ V AC} \rightarrow 12\text{ V DC}$)**: Utilizzare un alimentatore switching esterno certificato (tipo "brick" da notebook/monitor) da **`12V DC / 5A (60W)`** con spinotto cilindrico standard `5.5 × 2.5 mm`.
 2. **PicoPSU DC-DC Interno (`PicoPSU-80` / `PicoPSU-120` o convertitore Buck `12V->5V 5A`)**:
-   * Installare la presa DC da pannello `5.5 × 2.5 mm` e l'interruttore a bilanciere posteriore negli appositi scassi predisposti sul pannello posteriore del case ([`case/Aleste520_Case.scad`](case/Aleste520_Case.scad)).
+   * Installare la presa DC da pannello `5.5 × 2.5 mm` e l'interruttore a bilanciere posteriore negli appositi scassi predisposti sul pannello posteriore del case ([`case/Aleste520_Case.FCStd`](case/Aleste520_Case.FCStd)).
    * Collegare il filo **Verde (`PS_ON#`, Pin 16 del connettore ATX 24-pin)** della PicoPSU a **Massa (`GND`, filo Nero, Pin 15/17)** tramite l'interruttore posteriore per comandare l'accensione della PicoPSU.
    * Portare i `+5V` (filo Rosso) e i `+12V` (filo Giallo) della PicoPSU alle piazzole `P1..P6` della scheda madre secondo la tabella seguente.
 
@@ -88,7 +88,7 @@ Consulta [**`case/README.md`**](case/README.md) per le istruzioni di stampa 3D, 
 
 * **Dimensioni Esterne**: `416.0 × 296.0 × 62.0 mm` (profilo inclinato ergonomico: `32 mm` sul fronte, `62 mm` sul pannello I/O posteriore).
 * **Sistema Strutturale Anti-Flessione a 3 Stadi** (progettato per azzerare qualsiasi flessione della tastiera durante la digitazione lungo i $358\text{ mm}$ di larghezza):
-  1. **Piastra di Montaggio Switch da `1.5 mm`** (`case/keyboard_plate.dxf` pronta per taglio laser in alluminio/acciaio/FR4, oppure stampabile in 3D selezionando `part = "plate"` in `case/Aleste520_Case.scad`).
+  1. **Piastra di Montaggio Switch da `1.5 mm`** (`case/keyboard_plate.dxf` pronta per taglio laser in alluminio/acciaio/FR4, oppure stampabile in 3D da `case/Aleste520_Switch_Plate.FCStd`).
   2. **Reticolo Ortogonale di Nervature di Rinforzo** integrato sotto la scocca superiore (`4.0 × 8.0 mm` di battuta perimetrale + 2 costole trasversali + 2 costole longitudinali).
   3. **7 Colonne Coassiali di Scarico a Compressione (`MH5..MH11`)** che scaricano la forza verticale di digitazione dalla tastiera (`MH1..MH10`) attraverso la scheda madre (`MH5..MH11`) direttamente sul fondo del case.
 
@@ -112,3 +112,4 @@ Tutti e 6 i file binari originali presenti nella cartella [`rom/`](rom/) sono **
 | [`rom/AF.BIN`](rom/AF.BIN) | `32 B` (`32×8` bit) | **`U69`** | **`SN74188`** (DIP-16 OC) | `N82S23`, `AM27S18`, `MMI6330`, `TBP18SA030` | `К155РЕ3` (`K155RE3`) | PROM Macchina a Stati / Precompensazione Floppy Disk Controller |
 
 > **⚠️ Nota Critica sul Tipo di Uscita (`U28`, `U67`, `U69`)**: Lo schema originale utilizza PROM bipolari con uscite **Open-Collector (OC)** (`82S129` / `AM27S20` per `U28`, `U67` e `82S23` / `SN74188` per `U69`). In particolare, su `U28` (`MAPPER.BIN`) il pin 13 (`CS1`) è pilotato da `/MAPBLK` e le uscite `MAP14..MAP17` sono collegate in **wired-OR** diretto con i register file open-collector `U87`/`U88` (`74LS170`): pertanto **`U28` DEVE obbligatoriamente essere un modello Open-Collector** (`AM27S20` / `82S129` / `74S287`, e **non** la versione totem-pole/tri-state `82S126` / `74S387` / `AM27S21`).
+
