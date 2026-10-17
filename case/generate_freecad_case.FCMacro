@@ -347,6 +347,8 @@ plate_shape  = build_switch_plate()
 
 bottom_q1, bottom_q2, bottom_q3, bottom_q4 = split_into_interlocking_quadrants(bottom_shape, 1.75)
 top_q1, top_q2, top_q3, top_q4             = split_into_interlocking_quadrants(top_shape, 5.0)
+plate_left  = plate_shape.common(Part.makeBox(kb_w/2.0, kb_d, 10.0, App.Vector(0, 0, -2.0)))
+plate_right = plate_shape.common(Part.makeBox(kb_w/2.0 + 5.0, kb_d, 10.0, App.Vector(kb_w/2.0, 0, -2.0)))
 
 # ============================================================================
 # SAVE MAIN ASSEMBLY DOCUMENT: case/Aleste520_Case.FCStd
@@ -381,6 +383,8 @@ for qname, qlabel, qshape in [
     ("Top_Q2_FrontRight",    "Top_Q2_FrontRight",    top_q2),
     ("Top_Q3_RearLeft",      "Top_Q3_RearLeft",      top_q3),
     ("Top_Q4_RearRight",     "Top_Q4_RearRight",     top_q4),
+    ("Plate_Left_Half",      "Plate_Left_Half",      plate_left),
+    ("Plate_Right_Half",     "Plate_Right_Half",     plate_right),
 ]:
     qo = doc.addObject("Part::Feature", qname)
     qo.Label = qlabel
