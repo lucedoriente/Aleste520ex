@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name "aleste-rescue")(type "Legacy")(uri "${KIPRJMOD}/aleste-rescue.lib")(options "")(descr ""))
-)

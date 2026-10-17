@@ -1,0 +1,335 @@
+﻿Tipo Componente,Numero (Designatore),Codice / Valore Componente,Footprint THT
+Circuito Integrato (IC),U1,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U2,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U3,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U4,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U5,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U6,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U7,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U8,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U9,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U10,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U11,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U12,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U13,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U14,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U15,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U16,HM50256P-20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U17,8255,DIP-40_W15.24mm_Socket
+Circuito Integrato (IC),U18,AY-3-8910,DIP-40_W15.24mm_Socket
+Circuito Integrato (IC),U19,MC146818P,DIP-24_W15.24mm_Socket
+Circuito Integrato (IC),U20,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U21,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U22,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U23,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U24,74LS151,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U25,MC6845,DIP-40_W15.24mm_Socket
+Circuito Integrato (IC),U26,74LS253,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U28,AM27S20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U29,74LS32,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U30,Z80CPU,DIP-40_W15.24mm_Socket
+Circuito Integrato (IC),U31,27C512,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U32,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U33,8253,DIP-24_W15.24mm_Socket
+Circuito Integrato (IC),U34,8251A,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U35,74LS08,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U36,74LS04,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U37,74LS161,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U38,74LS257,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U39,74LS194,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U40,74LS74,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U41,74HC00,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U42,74LS04,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U43,74LS02,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U44,74LS32,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U45,74LS373,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U46,74LS373,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U47,74LS373,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U48,74LS373,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U49,74LS194,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U50,74LS194,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U51,74LS194,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U52,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U53,74LS153,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U54,74LS155,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U55,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U56,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U57,74LS74,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U58,74LS374,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U59,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U60,AM29705,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U61,AM29705,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U62,2716,DIP-24_W10.16mm_Socket
+Circuito Integrato (IC),U63,MC14520BCP,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U64,MC14520BCP,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U65,2716,DIP-24_W10.16mm_Socket
+Circuito Integrato (IC),U66,74LS74,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U67,AM27S20,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U68,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U69,SN74188,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U70,8272,DIP-40_W15.24mm_Socket
+Circuito Integrato (IC),U71,74LS74,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U72,74LS93,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U73,74LS04,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U74,74LS155,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U75,74HC00,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U76,74LS05,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U77,74LS74,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U78,74LS00,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U79,74LS174,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U80,74LS145,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U81,74LS151,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U82,AM29705,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U83,AM29705,DIP-28_W15.24mm_Socket
+Circuito Integrato (IC),U84,74LS374,DIP-20_W7.62mm_Socket
+Circuito Integrato (IC),U85,74LS08,DIP-14_W7.62mm_Socket
+Circuito Integrato (IC),U86,SN75150P,DIP-8_W7.62mm_Socket
+Circuito Integrato (IC),U87,74LS170,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U88,74LS170,DIP-16_W7.62mm_Socket
+Circuito Integrato (IC),U89,74LS245,DIP-20_W7.62mm_Socket
+Condensatore Ceramico,C1,470,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C2,470,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C3,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C4,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C5,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Elettrolitico,C6,1nF,CP_Radial_D5.0mm_P2.50mm
+Condensatore Ceramico,C7,"0,33uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C8,1F,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C9,"1,5uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Elettrolitico,C10,100v,CP_Radial_D5.0mm_P2.50mm
+Condensatore Ceramico,C11,12,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C12,24,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C13,47F,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Elettrolitico,C14,100nF,CP_Radial_D5.0mm_P2.50mm
+Condensatore Ceramico,C15,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C16,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C17,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C18,CAP,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,C20,1000uF,C_Radial_D10.0mm_H16.0mm_P5.00mm
+Condensatore Elettrolitico,C22,100uF,CP_Radial_D5.0mm_P2.50mm
+Condensatore Ceramico,C23,"0,47uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Elettrolitico,C24,1uF,CP_Radial_D5.0mm_P2.50mm
+Condensatore Elettrolitico,C25,47uF,CP_Radial_D5.0mm_P2.50mm
+Condensatore Elettrolitico,C26,47uF,CP_Radial_D5.0mm_P2.50mm
+Condensatore di Decoupling Ceramico,C200,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C201,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C202,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C203,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C204,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C205,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C206,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C207,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C208,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C209,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C210,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C211,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C212,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C213,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C214,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C215,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C216,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C217,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C218,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C219,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C220,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C221,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C222,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C223,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C224,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C225,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C226,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C227,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C228,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C229,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C230,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C231,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C232,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C233,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C234,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C235,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C236,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C237,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C238,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C239,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C240,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C241,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C242,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C244,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C245,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C246,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C247,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C248,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C249,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C250,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C251,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C252,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C253,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C254,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C255,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C256,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C257,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C258,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C259,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C260,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C261,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C262,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C263,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C264,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C265,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C266,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C267,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C268,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C269,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C270,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C271,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C272,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C273,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C274,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C275,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C276,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C277,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C278,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C279,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C280,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C281,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C282,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C283,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C284,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore di Decoupling Ceramico,C285,100nF,C_Disc_D5.0mm_W2.5mm_P2.50mm
+Condensatore Ceramico,CB1,"0,1uF",C_Disc_D5.0mm_W2.5mm_P2.50mm
+Resistore,R1,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R2,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R3,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R4,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R5,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R6,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R7,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R8,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R9,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R14,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R15,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R16,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R24,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R25,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R26,10k,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R27,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R33,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R34,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R35,390K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R36,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R37,10М,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R38,470K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R39,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R40,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R41,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R42,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R43,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R44,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R45,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R46,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R51,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R52,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R53,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R54,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R55,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R56,200,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R57,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R58,510,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R59,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R60,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R61,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R62,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R63,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R64,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R65,120,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R66,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R76,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R77,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R78,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R79,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R80,51,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R81,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R82,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R83,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R84,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R85,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R86,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R87,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R100,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R101,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R102,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R105,"1,2K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R114,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R115,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R116,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R117,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R118,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R119,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R120,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R121,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R122,27,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R123,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R126,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R127,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R128,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R129,510,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R130,220,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R131,"6,8K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R132,"2,7K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R133,"3,3K",R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R134,360,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R135,10K,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Resistore,R136,RES,R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal
+Rete Resistiva (SIP),RN1,10K,R_Array_SIP9
+Rete Resistiva (SIP),RN2,10K,R_Array_SIP9
+Rete Resistiva (SIP),RN3,"1,2K",R_Array_SIP6
+Rete Resistiva (SIP),RN4,"2,7K",R_Array_SIP5
+Rete Resistiva (SIP),RN5,10K,R_Array_SIP5
+Rete Resistiva (SIP),RN6,"1,2K",R_Array_SIP5
+Rete Resistiva (SIP),RN7,"1,2K",R_Array_SIP5
+Rete Resistiva (SIP),RN8,"1,2K",R_Array_SIP6
+Rete Resistiva (SIP),RN9,10K,R_Array_SIP4
+Diodo,VD1,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD2,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo LED,VD3,LED_MY,LED_D3.0mm
+Diodo,VD4,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD5,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD6,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD7,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD8,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD9,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD10,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD11,ZDIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD12,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD13,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo,VD14,DIODE_MY,D_DO-35_SOD27_P7.62mm_Horizontal
+Diodo LED,VD15,LED_MY,LED_D3.0mm
+Diodo LED,VD16,LED_MY,LED_D3.0mm
+Transistor,VT1,NPN,TO-39-3
+Transistor,VT2,NPN,TO-39-3
+Transistor,VT3,NPN,TO-39-3
+Transistor,VT4,NPN,TO-39-3
+Transistor,VT5,NPN,TO-39-3
+Quarzo / Oscillatore,Q1,16 MHz,Crystal_HC49-U_Vertical
+Quarzo / Oscillatore,Q2,13.333 MHz,Crystal_HC49-U_Vertical
+Quarzo / Oscillatore,Q3,QUARTZ,Crystal_AT310_D3.0mm_L10.0mm_Horizontal
+Induttore / Impedenza,DR1,91uH,L_Axial_L5.3mm_D2.2mm_P10.16mm_Horizontal_Vishay_IM-1
+Induttore / Impedenza,DR2,51uH,L_Axial_L5.3mm_D2.2mm_P10.16mm_Horizontal_Vishay_IM-1
+Connettore,X1,Expansion port,SLOT_62
+Connettore,X2,DB9_Male,DSUB-9_Pins_Horizontal_P2.77x2.54mm_EdgePinOffset9.40mm
+Connettore,X3,CONN-5S,DNR-5F1R
+Connettore,X4,Floppy,SLOT-34
+Connettore,X5.A1,CONN-7S,CUI_SDS-70J
+Connettore,X5.B1,CONN-7S,CUI_SDS-70J
+Connettore,X6,CONN-7S,DNR-8F1R
+Connettore,X7,CONN-7S,DNR-8F1R
+Connettore,X8,CONN-12,PinHeader_1x12_P1.27mm_Vertical
+Connettore,X9,CONN-12,PinHeader_1x12_P1.27mm_Vertical
+Foro di Fissaggio / Piazzola,P1,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P2,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P3,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P4,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P5,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P6,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P7,PIN,MountingHole_2.2mm_M2_DIN965_Pad
+Foro di Fissaggio / Piazzola,P8,PIN,MountingHole_2.2mm_M2_DIN965_Pad

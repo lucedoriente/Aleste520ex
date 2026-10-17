@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "aleste-rescue")(type "KiCad")(uri "${KIPRJMOD}/aleste-rescue.kicad_sym")(options "")(descr ""))
+  (lib (name "Aleste520v2-cache")(type "KiCad")(uri "${KIPRJMOD}/Aleste520v2-cache.kicad_sym")(options "")(descr ""))
+  (lib (name "Aleste520v2")(type "KiCad")(uri "${KIPRJMOD}/Aleste520v2.kicad_sym")(options "")(descr ""))
+)

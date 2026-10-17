@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Aleste520v2")(type "KiCad")(uri "${KIPRJMOD}/Aleste520v4.pretty")(options "")(descr ""))
+  (lib (name "Common_Alessio")(type "KiCad")(uri "C:/Users/aless/OneDrive/Documenti/KiCad/9.0/footprints/Common_Alessio.pretty")(options "")(descr ""))
+)

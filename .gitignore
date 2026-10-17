@@ -1,0 +1,14 @@
+# KiCad temporary and backup files
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.kicad_pcb-bak
+*.kicad_sch-bak
+_autosave-*
+*.lck
+~*
+
+# Autorouter temporary files
+*.dsn
+*.ses
+*.rules
