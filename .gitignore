@@ -12,3 +12,7 @@ _autosave-*
 *.dsn
 *.ses
 *.rules
+
+__pycache__/
+*.pyc
+
