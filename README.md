@@ -19,7 +19,7 @@ Complete Western reproduction of the **1993 Soviet Aleste 520EX** Z80 personal c
 * **100% Through-Hole (THT) Assembly**:
   * Every component (`U1..U89` DIP sockets, axial resistors, ceramic/electrolytic capacitors, diodes, transistors, crystals, trimmers, connectors) uses standard Through-Hole footprints for straightforward hand soldering and maintenance.
   * Both `F.Silkscreen` reference designators (`U1..U89`) and IC part numbers (`Value`, e.g., `74LS174`, `AM29705`, `Z80CPU`) are printed cleanly inside each DIP socket outline.
-* **Fully Routed 2-Layer PCB (`286 × 220 mm`)**:
+* **Fully Routed 2-Layer PCB (`400.9 × 280.5 mm`)**:
   * **0 ERC Errors** across the hierarchical schematic (`Aleste520v4.kicad_sch` + 6 sub-sheets).
   * **0 DRC Violations & 0 Unconnected Items** on the PCB (`Aleste520v4.kicad_pcb`).
   * **Signal Integrity & Power Distribution**:
@@ -41,7 +41,7 @@ Complete Western reproduction of the **1993 Soviet Aleste 520EX** Z80 personal c
   * `gatearray.kicad_sch` — Video shift registers, Color Lookup EPROM (`U62`), and Color Palette RAM (`U60`, `U61` `AM29705`)
   * `periph.kicad_sch` — PPI (`8255`), PIT (`8253`), USART (`8251A`), PSG (`AY-3-8910`), RTC (`MC146818P`), audio & I/O ports
   * `fdc.kicad_sch` — Floppy Disk Controller (`8272` / `uPD765`), data separator & state PROM (`U69`)
-* `Aleste520v4.kicad_pcb` — Fully routed 2-layer PCB (`286 × 220 mm`)
+* `Aleste520v4.kicad_pcb` — Fully routed 2-layer PCB (`400.9 × 280.5 mm`)
 * `Aleste520v2.kicad_sym` / `Aleste520v3-rescue.kicad_sym` / `Aleste520v4.pretty/` — Project symbol and footprint libraries
 * `Componenti_Aleste520v4.csv` (semicolon-delimited) / `Componenti_Aleste520v4_comma.csv` (comma-delimited) — Complete Bill of Materials (BOM) with component type, designator (`U1..U89`, `C1..C128`, `R1..R109`, etc.), part number/value, and THT footprint.
 * `rom/` — Original binary ROM/PROM images (100% bit-compatible with this board).

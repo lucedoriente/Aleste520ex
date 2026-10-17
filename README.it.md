@@ -19,7 +19,7 @@ Riproduzione occidentale completa del personal computer sovietico **Aleste 520EX
 * **Montaggio 100% Through-Hole (THT)**:
   * Tutti i componenti (zocoli DIP `U1..U89`, resistenze, condensatori ceramici/elettrolitici, diodi, transistor, quarzi, trimmer, connettori) adottano footprint THT standard per una saldatura manuale agevole e una manutenzione immediata.
   * Sulla serigrafia superiore (`F.Silkscreen`) sono stampati sia i designatori (`U1..U89`) sia il codice integrato (`Value`, es. `74LS174`, `AM29705`, `Z80CPU`) centrati all'interno di ogni zoccolo DIP.
-* **PCB 2-Layer Completamente Sbrogliato (`286 × 220 mm`)**:
+* **PCB 2-Layer Completamente Sbrogliato (`400,9 × 280,5 mm`)**:
   * **0 Errori ERC** sullo schema elettrico gerarchico (`Aleste520v4.kicad_sch` + 6 sottoschemi).
   * **0 Violazioni DRC e 0 Pin Non Connessi** sul PCB (`Aleste520v4.kicad_pcb`).
   * **Integrità del Segnale e Distribuzione Alimentazione**:
@@ -41,7 +41,7 @@ Riproduzione occidentale completa del personal computer sovietico **Aleste 520EX
   * `gatearray.kicad_sch` — Shift register video, EPROM lookup colori (`U62`) e RAM Palette Colori (`U60`, `U61` `AM29705`)
   * `periph.kicad_sch` — PPI (`8255`), PIT (`8253`), USART (`8251A`), PSG (`AY-3-8910`), RTC (`MC146818P`), audio e porte I/O
   * `fdc.kicad_sch` — Floppy Disk Controller (`8272` / `uPD765`), separatore dati e PROM macchina a stati (`U69`)
-* `Aleste520v4.kicad_pcb` — PCB a 2 layer completamente sbrogliato (`286 × 220 mm`)
+* `Aleste520v4.kicad_pcb` — PCB a 2 layer completamente sbrogliato (`400,9 × 280,5 mm`)
 * `Aleste520v2.kicad_sym` / `Aleste520v3-rescue.kicad_sym` / `Aleste520v4.pretty/` — Librerie simboli e footprint del progetto
 * `Componenti_Aleste520v4.csv` (separatore `;` per Excel IT) / `Componenti_Aleste520v4_comma.csv` (separatore `,`) — Distinta componenti completa (BOM) con tipo componente, designatore (`U1..U89`, `C1..C128`, `R1..R109`, ecc.), codice componente e footprint THT.
 * `rom/` — Immagini binarie originali delle ROM/PROM (compatibili al 100% bit-per-bit con questa scheda).
